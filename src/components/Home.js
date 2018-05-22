@@ -3,25 +3,17 @@ import React from 'react'
 class Home extends React.Component {
   render() {
     return(
-      <div style={styles.errorPage}>
-        <h1 style={{fontSize: '60px', margin:0}}>HOME</h1>
+      <div>
+        <div style={{width: '100%', height: '700px', overflow: 'hidden'}}>
+          <img style={{width: '100%', marginTop: '-200px', opacity: '0.8'}} src={ require('../IMG/homebg.jpg') } alt="background"/>
+        </div>
+
+        <div style={{textAlign: 'center', color: '#777'}}>
+          <p style={{fontSize: 50, marginTop: '100px'}}> Welkom bij HomeReval </p>
+        </div>
+
       </div>
     )
-  }
-}
-
-const styles = {
-  errorPage: {
-    position: 'absolute',
-    margin: 'auto',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    maxWidth: '250px',
-    height: '100px',
-    textAlign: 'center',
-    color: '#9E9E9E'
   }
 }
 
