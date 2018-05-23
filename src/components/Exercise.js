@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import ReactGauge from 'react-gauge-capacity';
 
 import {
-  Paper,
   IconButton
 } from 'material-ui';
 import BackIcon from 'material-ui-icons/ArrowBack';
@@ -29,8 +28,8 @@ class Exercise extends Component {
             <BackIcon />
           </IconButton>
 
-          <Typography variant="title" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '48px'}}>
-            Exercise {currentExercise.id}
+          <Typography variant="title" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '50px'}}>
+            Oefening {currentExercise.id}
           </Typography>
         </div>
 
@@ -95,7 +94,8 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'row',
-    margin: '100px'
+    margin: '100px',
+    marginTop: '50px'
   },
   gauge: {
     width: '50%',

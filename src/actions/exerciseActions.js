@@ -1,5 +1,5 @@
-import axios from "axios"
-import {history} from "../helpers/history"
+//import axios from "axios"
+//import {history} from "../helpers/history"
 
 export function getExercises(){
   return {

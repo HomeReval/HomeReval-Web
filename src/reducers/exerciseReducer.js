@@ -25,26 +25,6 @@ const defaultState = {
       exerciseResults: [
         {score: 56}
       ]
-    },
-    { id: 6,
-      exerciseResults: [
-        {score: 38}
-      ]
-    },
-    { id: 7,
-      exerciseResults: [
-        {score: 92}
-      ]
-    },
-    { id: 8,
-      exerciseResults: [
-        {score: 12}
-      ]
-    },
-    { id: 9,
-      exerciseResults: [
-        {score: 56}
-      ]
     }
   ]
 }

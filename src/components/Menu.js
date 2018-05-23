@@ -40,7 +40,7 @@ class Menu extends React.Component {
           <Typography variant="title" color="inherit" style={{flex: 1}}>
             HomeReval
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Inloggen</Button>
           <IconButton color="inherit">
             <AccountIcon />
           </IconButton>
@@ -72,7 +72,7 @@ class Menu extends React.Component {
                     <ListItemIcon>
                       <RowingIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Exercises" />
+                    <ListItemText primary="Oefeningen" />
                   </ListItem>
                 </Link>
               </List>
@@ -82,7 +82,7 @@ class Menu extends React.Component {
               <List>
                 <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
                   <ListItem button>
-                    <ListItemText primary="Logout" />
+                    <ListItemText primary="Uitloggen" />
                   </ListItem>
                 </Link>
               </List>
