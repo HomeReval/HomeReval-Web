@@ -95,7 +95,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     margin: '100px',
-    marginTop: '50px'
+    marginTop: '24px'
   },
   gauge: {
     width: '50%',
