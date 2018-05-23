@@ -11,7 +11,6 @@ class Home extends React.Component {
         <div style={{textAlign: 'center', color: '#777'}}>
           <p style={{fontSize: 50, marginTop: '100px'}}> Welkom bij HomeReval </p>
         </div>
-
       </div>
     )
   }

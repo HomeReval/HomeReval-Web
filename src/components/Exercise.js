@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import ReactGauge from 'react-gauge-capacity';
+
+import {
+  Paper,
+  IconButton
+} from 'material-ui';
+import BackIcon from 'material-ui-icons/ArrowBack';
+
+import {history} from "../helpers/history";
+
+import {
+  Typography,
+} from 'material-ui';
 
 class Exercise extends Component {
   render() {
@@ -10,11 +22,35 @@ class Exercise extends Component {
     let scoreDeg = score * 180 / 100;
 
     return(
-      <div style={styles.center}>
-        <ReactGauge {...options} arrowValue={ scoreDeg/180 } />
+      <div style={{margin: '64px'}}>
 
-        <p>Score: {score} </p>
-        <a href="/">Hoe wij hier aan komen</a>
+        <div style={{display: 'flex'}}>
+          <IconButton color="inherit" onClick={history.goBack}>
+            <BackIcon />
+          </IconButton>
+
+          <Typography variant="title" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '48px'}}>
+            Exercise {currentExercise.id}
+          </Typography>
+        </div>
+
+        <div style={styles.root}>
+
+          <div style={{width: '50%'}}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id convallis purus. Praesent vulputate ante eu neque ullamcorper, id eleifend nibh faucibus. Ut ac sem sit amet dui condimentum luctus eget at lorem. Curabitur tincidunt in dolor sit amet condimentum. Ut finibus laoreet vestibulum. Suspendisse ac nisl ac justo convallis sollicitudin nec non est. Ut volutpat magna vitae augue pharetra, vitae luctus sapien laoreet. Quisque malesuada aliquet mattis. Nam mattis euismod mattis.
+          <br/>
+          <br/>
+            Ut sagittis congue nisi, consequat scelerisque nisi malesuada eget. Vivamus a neque libero. Duis rhoncus, lorem sit amet porttitor ornare, mauris eros egestas sapien, ut aliquam nibh elit vel nunc. Sed urna metus, suscipit nec eros quis, finibus tempor mi. Praesent eget lectus blandit, efficitur diam vitae, porttitor ligula. Sed dignissim, lacus in porttitor ullamcorper, diam ligula suscipit nibh, id malesuada ante ante in justo. In mi velit, vehicula in turpis quis, volutpat tempus orci. Quisque tortor lorem, efficitur nec dui eu, varius luctus nisl. Nullam pellentesque erat non tellus bibendum pharetra. Mauris sed dapibus risus, sit amet fermentum sem. Donec porttitor, libero et dictum rhoncus, sapien nulla fermentum quam, eget interdum massa est nec nulla. Nam turpis nunc, dictum nec tortor sit amet, molestie euismod dui. Maecenas a lacinia quam.
+          </div>
+
+          <div style={styles.gauge}>
+          <div>
+            <ReactGauge {...options} arrowValue={ scoreDeg/180 } />
+
+            <p style={{textAlign: 'center'}}>Score: {score} </p>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -39,16 +75,16 @@ let options = {
     viewBox: "30 0 300 200",
     ranges: [{
             start: 0,
-            end: 20/180,
+            end: 81/180,
             color: "#f3595b"
         },
         {
-            start: 20/180,
-            end: 100/180,
+            start: 81/180,
+            end: 135/180,
             color: "#ffc875"
         },
         {
-            start: 100/180,
+            start: 135/180,
             end: 180/180,
             color: "#83d7c0"
         }]
@@ -56,17 +92,17 @@ let options = {
 };
 
 const styles = {
-  center: {
-    position: 'absolute',
-    margin: 'auto',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    maxWidth: '400px',
-    height: '300px',
-    textAlign: 'center',
-    color: '#9E9E9E'
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    margin: '100px'
+  },
+  gauge: {
+    width: '50%',
+    display: 'flex',
+    alignItems: 'flex-end',
+    flexDirection: 'column',
+    justifyContent: 'center'
   }
 }
 

@@ -36,7 +36,12 @@ const styles = {
   tile: {
     width: '200px',
     height: '200px',
-    margin: '10px'
+    margin: '10px',
+    textAlign: 'center',
+    fontSize: '50px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   }
 }
 
