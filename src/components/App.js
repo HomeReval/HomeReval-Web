@@ -8,53 +8,74 @@ import {
 
 import { history } from "../helpers/history"
 import FourOFour from "./404"
+import Login from "./Login"
 import Home from './Home'
 import Menu from './Menu'
 import Exercises from './Exercises'
 import Exercise from './Exercise'
 
 import {
-  getExercises,
-} from '../actions/exerciseActions'
+  showDrawer,
+  hideDrawer,
+} from '../actions/componentActions'
 
 class App extends React.Component {
 
-  getExercises = (index) => {
-    this.props.dispatch(getExercises(index))
+  showDrawer = () => {
+    this.props.dispatch(showDrawer())
+  }
+
+  hideDrawer = () => {
+    this.props.dispatch(hideDrawer())
   }
 
   render() {
+
+    console.log(this.props.state);
+
     return (
       <div>
         <Router history={ history }>
           <Fragment>
             <div style={{display: 'flex', flexDirection: 'row',}}>
 
-              <div style={{width: '250px'}}>
-                <Menu />
+              <div>
+                <Menu drawerVariant={this.props.state.component.drawerVariant}/>
               </div>
 
               <div style={{width: '100%'}}>
                 <Switch>
 
                   <Route exact path='/' render={ (props) => (
-                    <Home { ...props } />
+                    <Home { ...props }
+                      showDrawer={this.showDrawer}
+                      drawerVariant={this.props.state.component.drawerVariant}/>
+                  ) } />
+
+                  <Route exact path='/login' render={ (props) => (
+                    <Login { ...props }
+                      hideDrawer={this.hideDrawer}
+                      drawerVariant={this.props.state.component.drawerVariant}/>
                   ) } />
 
                   <Route exact path='/exercises' render={ (props) => (
                     <Exercises { ...props }
                       state={this.props.state}
-                      getExercises={this.getExercises}/>
+                      showDrawer={this.showDrawer}
+                      drawerVariant={this.props.state.component.drawerVariant}/>
                   ) } />
 
                   <Route exact path='/exercise/:id' render={ (props) => (
                     <Exercise { ...props }
                       state={this.props.state}
-                      getExercises={this.getExercises}/>
+                      showDrawer={this.showDrawer}
+                      drawerVariant={this.props.state.component.drawerVariant}/>
                   ) } />
 
                   <Route path='*' render={ (props) => (
-                    <FourOFour { ...props }/>
+                    <FourOFour { ...props }
+                      hideDrawer={this.hideDrawer}
+                      drawerVariant={this.props.state.component.drawerVariant}/>
                   ) } />
 
                 </Switch>

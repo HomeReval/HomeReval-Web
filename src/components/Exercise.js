@@ -7,7 +7,7 @@ import {
 } from 'material-ui';
 import BackIcon from 'material-ui-icons/ArrowBack';
 
-import {history} from "../helpers/history";
+import { history } from "../helpers/history";
 
 import {
   Typography,
@@ -17,8 +17,19 @@ class Exercise extends Component {
   render() {
 
     let currentExercise = this.props.exercises.find(x => x.id == this.props.match.params.id);
+
+    if (currentExercise === undefined){
+      history.push('/exercises')
+
+      return null;
+    }
+
     let score = currentExercise.exerciseResults[0].score;
     let scoreDeg = score * 180 / 100;
+
+    if (this.props.drawerVariant == 'temporary'){
+      this.props.showDrawer()
+    }
 
     return(
       <div style={{margin: '64px'}}>

@@ -2,10 +2,15 @@ import React from 'react'
 
 class Home extends React.Component {
   render() {
+
+    if (this.props.drawerVariant == 'temporary'){
+      this.props.showDrawer()
+    }
+
     return(
       <div>
         <div style={{width: '100%', height: '700px', overflow: 'hidden'}}>
-          <img style={{width: '100%', marginTop: '-200px', opacity: '0.8'}} src={ require('../IMG/homebg.jpg') } alt="background"/>
+          <img style={{width: '100%', marginTop: '-250px', opacity: '0.8'}} src={ require('../IMG/homebg.jpg') } alt="background"/>
         </div>
 
         <div style={{textAlign: 'center', color: '#777'}}>

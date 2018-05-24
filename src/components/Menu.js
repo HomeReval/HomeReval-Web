@@ -40,14 +40,16 @@ class Menu extends React.Component {
           <Typography variant="title" color="inherit" style={{flex: 1}}>
             HomeReval
           </Typography>
-          <Button color="inherit">Inloggen</Button>
+          <Link to={"/login"} style={{textDecoration: 'none', color: 'black'}}>
+            <Button color="inherit">Inloggen</Button>
+          </Link>
           <IconButton color="inherit">
             <AccountIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
 
-        <Drawer open={this.state.left} onClose={this.toggleDrawer(false)} variant={'permanent'} style={{position: 'relative', zIndex: 1, width: '250px'}}>
+        <Drawer open={this.state.left} onClose={this.toggleDrawer(false)} variant={this.props.drawerVariant} style={{position: 'relative', zIndex: 1, width: '250px'}}>
           <div
             tabIndex={0}
             role="button"
@@ -73,16 +75,6 @@ class Menu extends React.Component {
                       <RowingIcon />
                     </ListItemIcon>
                     <ListItemText primary="Oefeningen" />
-                  </ListItem>
-                </Link>
-              </List>
-
-              <Divider/>
-
-              <List>
-                <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
-                  <ListItem button>
-                    <ListItemText primary="Uitloggen" />
                   </ListItem>
                 </Link>
               </List>

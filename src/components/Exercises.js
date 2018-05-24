@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 class Exercises extends React.Component {
   render() {
 
+    if (this.props.drawerVariant == 'temporary'){
+      this.props.showDrawer()
+    }
+
     console.log(this.props.exercises);
 
     return(
