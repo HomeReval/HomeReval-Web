@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Paper, TextField, Button } from 'material-ui'
+import { Paper, TextField, Button } from '@material-ui/core'
 
 class Login extends React.Component {
   render() {

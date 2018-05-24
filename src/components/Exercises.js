@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Paper } from 'material-ui'
+import { Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 class Exercises extends React.Component {

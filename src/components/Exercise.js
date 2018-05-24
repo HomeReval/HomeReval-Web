@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ReactGauge from 'react-gauge-capacity';
+import ReactGauge from './react-gauge-capacity';
 
 import {
-  IconButton
-} from 'material-ui';
-import BackIcon from 'material-ui-icons/ArrowBack';
+  IconButton,
+  Typography
+} from '@material-ui/core';
+import BackIcon from '@material-ui/icons/ArrowBack';
 
 import { history } from "../helpers/history";
-
-import {
-  Typography,
-} from 'material-ui';
 
 class Exercise extends Component {
   render() {

@@ -14,11 +14,11 @@ import {
   ListItemIcon,
   ListItemText,
   Divider
-} from 'material-ui';
+} from '@material-ui/core';
 
-import HomeIcon from 'material-ui-icons/Home';
-import RowingIcon from 'material-ui-icons/Rowing';
-import AccountIcon from 'material-ui-icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
+import RowingIcon from '@material-ui/icons/Rowing';
+import AccountIcon from '@material-ui/icons/AccountCircle';
 
 class Menu extends React.Component {
 

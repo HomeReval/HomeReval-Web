@@ -1,0 +1,59 @@
+{
+  "_from": "react-gauge-capacity",
+  "_id": "react-gauge-capacity@1.9.0",
+  "_inBundle": false,
+  "_integrity": "sha512-/ZkOm6/D4hAyQOr49vcacMgQ2+63znVoU1BTNC60icYX1FEpLAgjz+g71WG9yfuRcHcPyWrTiAUvGfbhC0G1cA==",
+  "_location": "/react-gauge-capacity",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "react-gauge-capacity",
+    "name": "react-gauge-capacity",
+    "escapedName": "react-gauge-capacity",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-gauge-capacity/-/react-gauge-capacity-1.9.0.tgz",
+  "_shasum": "f3eaad30bde2117258e058f95a9ea9eb3b0369e3",
+  "_spec": "react-gauge-capacity",
+  "_where": "C:\\Users\\Bart\\Documents\\GitHub\\TODSS-18\\homereval-web",
+  "author": {
+    "name": "Gurpreet",
+    "email": "gurpreet.singh1@globalpueblosolutions.com"
+  },
+  "bugs": {
+    "url": "https://github.com/Gurpreets/react-gauge-capacity/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A React.js gauge component",
+  "devDependencies": {
+    "react": "15.4.2"
+  },
+  "homepage": "https://github.com/Gurpreets/react-gauge-capacity#readme",
+  "keywords": [
+    "React.js",
+    "React",
+    "svg",
+    "gauge",
+    "component",
+    "react-component"
+  ],
+  "license": "MIT",
+  "main": "lib/react-gauge.js",
+  "name": "react-gauge-capacity",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gurpreets/react-gauge-capacity.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.9.0"
+}
