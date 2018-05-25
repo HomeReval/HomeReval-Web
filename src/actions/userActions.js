@@ -11,6 +11,7 @@ export function login(username, password) {
         "password":password
       }
     ).then((response) => {
+        console.log(response);
         //Set local storage token
         localStorage.setItem('acces_token', response.accesToken)
         localStorage.setItem('refresh_token', response.refreshToken)
