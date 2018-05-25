@@ -11,6 +11,13 @@ import BackIcon from '@material-ui/icons/ArrowBack';
 import { history } from "../helpers/history";
 
 class Exercise extends Component {
+
+  componentWillMount(){
+    if (this.props.drawerVariant === 'temporary'){
+      this.props.showDrawer()
+    }
+  }
+
   render() {
 
     //eslint-disable-next-line
@@ -24,10 +31,6 @@ class Exercise extends Component {
 
     let score = currentExercise.exerciseResults[0].score;
     let scoreDeg = score * 180 / 100;
-
-    if (this.props.drawerVariant === 'temporary'){
-      this.props.showDrawer()
-    }
 
     return(
       <div style={{margin: '64px'}}>

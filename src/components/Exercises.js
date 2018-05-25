@@ -4,12 +4,14 @@ import { Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 class Exercises extends React.Component {
-  render() {
 
+  componentWillMount(){
     if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()
     }
+  }
 
+  render() {
     return(
       <div style={styles.root}>
         {this.props.exercises.map(function(item, i){

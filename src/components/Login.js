@@ -28,12 +28,14 @@ class Login extends React.Component {
   onPasswordChange = (e) => {
     this.setState({password: e.target.value})
   }
-  render(){
 
+  componentWillMount(){
     if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()
     }
+  }
 
+  render(){
     return (
       <div>
 

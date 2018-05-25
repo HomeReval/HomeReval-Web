@@ -1,12 +1,14 @@
 import React from 'react'
 
 class Home extends React.Component {
-  render() {
 
+  componentWillMount(){
     if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()
     }
+  }
 
+  render() {
     return(
       <div>
         <div style={{width: '100%', height: '700px', overflow: 'hidden'}}>

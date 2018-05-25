@@ -1,12 +1,14 @@
 import React from 'react'
 
 class FourOFour extends React.Component {
-  render(){
 
+  componentWillMount(){
     if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()
     }
+  }
 
+  render(){
     return(
       <div style={styles.errorPage}>
         <h1 style={{fontSize: '60px', margin:0}}>404</h1>
