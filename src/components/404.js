@@ -3,7 +3,7 @@ import React from 'react'
 class FourOFour extends React.Component {
   render(){
 
-    if (this.props.drawerVariant == 'permanent'){
+    if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()
     }
 

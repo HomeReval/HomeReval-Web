@@ -79,6 +79,21 @@ class Menu extends React.Component {
                 </Link>
               </List>
 
+              <Divider />
+
+              <List>
+                <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                  <ListItem button>
+                    <ListItemText primary="Optie 1" />
+                  </ListItem>
+                </Link>
+                <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                  <ListItem button>
+                    <ListItemText primary="Optie 2" />
+                  </ListItem>
+                </Link>
+              </List>
+
             </div>
           </div>
         </Drawer>

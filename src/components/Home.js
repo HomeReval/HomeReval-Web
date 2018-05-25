@@ -3,7 +3,7 @@ import React from 'react'
 class Home extends React.Component {
   render() {
 
-    if (this.props.drawerVariant == 'temporary'){
+    if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()
     }
 

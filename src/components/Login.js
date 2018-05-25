@@ -1,42 +1,75 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { Paper, TextField, Button } from '@material-ui/core'
+import { blue } from '@material-ui/core/colors';
+
+import AccountIcon from '@material-ui/icons/AccountCircle';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  },
+});
 
 class Login extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {username: '', password: ''}
 
-    if (this.props.drawerVariant == 'permanent'){
+    this.onUsernameChange = this.onUsernameChange.bind(this)
+    this.onPasswordChange = this.onPasswordChange.bind(this)
+  }
+
+  onUsernameChange = (e) => {
+    this.setState({username: e.target.value})
+  }
+
+  onPasswordChange = (e) => {
+    this.setState({password: e.target.value})
+  }
+  render(){
+
+    if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()
     }
+    
+    return (
+      <div>
 
-    return(
-      <div style={styles.center}>
-        <Paper style={styles.paper}>
+        <div style={styles.center}>
+          <Paper style={styles.loginPaper}>
+            <MuiThemeProvider theme={theme}>
 
-        <TextField
-          id="password-input"
-          label="Gebruikersnaam"
-          type="text"
-          autoComplete="current-password"
-          margin="normal"
-          autoFocus={true}
-        />
+              <AccountIcon style={{width: '100%', fontSize: '250px', color: '#2196f3'}}/>
 
-        <TextField
-          id="password-input"
-          label="wachtwoord"
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-        />
+              <TextField
+                id="username-input"
+                label="Gebruikersnaam"
+                type="text"
+                autoComplete="current-password"
+                margin="normal"
+                autoFocus={true}
+                onChange={ this.onUsernameChange }
+                />
 
-          <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
-            <Button>login</Button>
-          </Link>
-        </Paper>
+              <TextField
+                id="password-input"
+                label="wachtwoord"
+                type="password"
+                autoComplete="current-password"
+                margin="normal"
+                onChange={ this.onPasswordChange }
+                />
+
+              <Button color="primary" style={{width: "100%", marginTop: '24px'}}
+                onClick={ () => this.props.login(this.state.username, this.state.password)}>Login</Button>
+
+            </MuiThemeProvider>
+          </Paper>
+        </div>
       </div>
-    )
+    );
   }
 }
 
@@ -49,17 +82,16 @@ const styles = {
     bottom: 0,
     left: 0,
     maxWidth: '350px',
-    height: '350px',
+    height: '502px',
     textAlign: 'center',
     color: '#9E9E9E'
   },
-  paper: {
+  loginPaper: {
     display: 'flex',
     flexDirection: 'column',
-    height: '350px',
     width: '300px',
-    padding: '24px'
+    padding: '24px',
   }
-}
+};
 
-export default Login
+export default Login;

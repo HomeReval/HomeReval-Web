@@ -24,7 +24,7 @@ class Exercise extends Component {
     let score = currentExercise.exerciseResults[0].score;
     let scoreDeg = score * 180 / 100;
 
-    if (this.props.drawerVariant == 'temporary'){
+    if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()
     }
 

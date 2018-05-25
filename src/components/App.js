@@ -14,12 +14,22 @@ import Menu from './Menu'
 import Exercises from './Exercises'
 import Exercise from './Exercise'
 
+import { login, logout, checkLoggedIn } from '../actions/userActions'
+
 import {
   showDrawer,
   hideDrawer,
 } from '../actions/componentActions'
 
 class App extends React.Component {
+
+  login = (username, password) => {
+    this.props.dispatch(login(username, password))
+  }
+
+  logout = () => {
+    this.props.dispatch(logout())
+  }
 
   showDrawer = () => {
     this.props.dispatch(showDrawer())
@@ -54,6 +64,7 @@ class App extends React.Component {
 
                   <Route exact path='/login' render={ (props) => (
                     <Login { ...props }
+                      login={this.login}
                       hideDrawer={this.hideDrawer}
                       drawerVariant={this.props.state.component.drawerVariant}/>
                   ) } />
