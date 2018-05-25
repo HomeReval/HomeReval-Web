@@ -33,7 +33,7 @@ class Login extends React.Component {
     if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()
     }
-    
+
     return (
       <div>
 
@@ -44,20 +44,15 @@ class Login extends React.Component {
               <AccountIcon style={{width: '100%', fontSize: '250px', color: '#2196f3'}}/>
 
               <TextField
-                id="username-input"
                 label="Gebruikersnaam"
-                type="text"
-                autoComplete="current-password"
                 margin="normal"
                 autoFocus={true}
                 onChange={ this.onUsernameChange }
                 />
 
               <TextField
-                id="password-input"
                 label="wachtwoord"
                 type="password"
-                autoComplete="current-password"
                 margin="normal"
                 onChange={ this.onPasswordChange }
                 />

@@ -13,6 +13,7 @@ import { history } from "../helpers/history";
 class Exercise extends Component {
   render() {
 
+    //eslint-disable-next-line
     let currentExercise = this.props.exercises.find(x => x.id == this.props.match.params.id);
 
     if (currentExercise === undefined){

@@ -6,7 +6,9 @@ export function login(username, password) {
   return function(dispatch) {
     dispatch({type: "USER_FETCH_LOGIN"})
 
-    axios.post( "http://136.144.132.176:5000/api/user/login", {
+    const url = "http://136.144.132.176:5000/api/user/login";
+
+    axios.post( url, {
         "username":username,
         "password":password
       }

@@ -10,14 +10,12 @@ class Exercises extends React.Component {
       this.props.showDrawer()
     }
 
-    console.log(this.props.exercises);
-
     return(
       <div style={styles.root}>
         {this.props.exercises.map(function(item, i){
           return(
-            <Link to={"/exercise/" + item.id} style={{textDecoration: 'none', color: 'black'}}>
-            <Paper key={item.id} style={styles.tile}>
+            <Link to={"/exercise/" + item.id} key={item.id} style={{textDecoration: 'none', color: 'black'}}>
+            <Paper  style={styles.tile}>
               {item.id}
             </Paper>
             </Link>
