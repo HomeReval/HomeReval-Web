@@ -8,17 +8,16 @@ export function login(username, password) {
 
     const url = "http://136.144.132.176:5000/api/user/login";
 
-    const data =
-
     axios.post( url, {
         "username":username,
         "password":password
       }
     ).then((response) => {
+        console.log("response:");
         console.log(response);
         //Set local storage token
-        localStorage.setItem('acces_token', response.accesToken)
-        localStorage.setItem('refresh_token', response.refreshToken)
+        localStorage.setItem('access_token', response.data.accessToken)
+        localStorage.setItem('refresh_token', response.data.refreshToken)
         localStorage.setItem('username', username)
 
         //Set logged in to true
@@ -50,7 +49,7 @@ export function login(username, password) {
 
 export function logout(){
   //Delete localStorage login token
-  localStorage.removeItem('acces_token')
+  localStorage.removeItem('access_token')
   localStorage.removeItem('refresh_token')
   localStorage.removeItem('username')
 

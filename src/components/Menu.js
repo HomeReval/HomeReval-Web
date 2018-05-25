@@ -87,9 +87,9 @@ class Menu extends React.Component {
                     <ListItemText primary="Optie 1" />
                   </ListItem>
                 </Link>
-                <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={"/Login"} onClick={() => this.props.logout()} style={{textDecoration: 'none', color: 'black'}}>
                   <ListItem button>
-                    <ListItemText primary="Optie 2" />
+                    <ListItemText primary="Logout" />
                   </ListItem>
                 </Link>
               </List>

@@ -47,7 +47,8 @@ class App extends React.Component {
             <div style={{display: 'flex', flexDirection: 'row',}}>
 
               <div>
-                <Menu drawerVariant={this.props.state.component.drawerVariant}/>
+                <Menu drawerVariant={this.props.state.component.drawerVariant}
+                  logout={this.logout}/>
               </div>
 
               <div style={{width: '100%'}}>
