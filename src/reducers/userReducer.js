@@ -29,12 +29,10 @@ export default function reducer(state=defaultState, action) {
           loggingIn: false
         }
       }
-      case "USER_LOGGED_IN": {
+      case "ALREADY_LOGGED_IN":{
         return {
           ...state,
-          loggedIn: true,
-          username: action.payload,
-          loggingIn: false
+          loggedIn: true
         }
       }
       case "USER_LOGOUT":{

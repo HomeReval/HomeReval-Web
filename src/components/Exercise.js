@@ -29,7 +29,7 @@ class Exercise extends Component {
       return null;
     }
 
-    let score = currentExercise.exerciseResults[0].score;
+    let score = 87 // currentExercise.exerciseResults[0].score;
     let scoreDeg = score * 180 / 100;
 
     return(
@@ -40,18 +40,15 @@ class Exercise extends Component {
             <BackIcon />
           </IconButton>
 
-          <Typography variant="title" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '50px'}}>
-            Oefening {currentExercise.id}
+          <Typography variant="title" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+            {currentExercise.description}
           </Typography>
         </div>
 
         <div style={styles.root}>
 
           <div style={{width: '50%'}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id convallis purus. Praesent vulputate ante eu neque ullamcorper, id eleifend nibh faucibus. Ut ac sem sit amet dui condimentum luctus eget at lorem. Curabitur tincidunt in dolor sit amet condimentum. Ut finibus laoreet vestibulum. Suspendisse ac nisl ac justo convallis sollicitudin nec non est. Ut volutpat magna vitae augue pharetra, vitae luctus sapien laoreet. Quisque malesuada aliquet mattis. Nam mattis euismod mattis.
-          <br/>
-          <br/>
-            Ut sagittis congue nisi, consequat scelerisque nisi malesuada eget. Vivamus a neque libero. Duis rhoncus, lorem sit amet porttitor ornare, mauris eros egestas sapien, ut aliquam nibh elit vel nunc. Sed urna metus, suscipit nec eros quis, finibus tempor mi. Praesent eget lectus blandit, efficitur diam vitae, porttitor ligula. Sed dignissim, lacus in porttitor ullamcorper, diam ligula suscipit nibh, id malesuada ante ante in justo. In mi velit, vehicula in turpis quis, volutpat tempus orci. Quisque tortor lorem, efficitur nec dui eu, varius luctus nisl. Nullam pellentesque erat non tellus bibendum pharetra. Mauris sed dapibus risus, sit amet fermentum sem. Donec porttitor, libero et dictum rhoncus, sapien nulla fermentum quam, eget interdum massa est nec nulla. Nam turpis nunc, dictum nec tortor sit amet, molestie euismod dui. Maecenas a lacinia quam.
+            Description hier
           </div>
 
           <div style={styles.gauge}>

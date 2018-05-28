@@ -35,6 +35,12 @@ class Login extends React.Component {
     }
   }
 
+  _handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.props.login(this.state.username, this.state.password);
+    }
+  }
+
   render(){
     return (
       <div>
@@ -57,6 +63,7 @@ class Login extends React.Component {
                 type="password"
                 margin="normal"
                 onChange={ this.onPasswordChange }
+                onKeyPress={this._handleKeyPress}
                 />
 
               <Button color="primary" style={{width: "100%", marginTop: '24px'}}

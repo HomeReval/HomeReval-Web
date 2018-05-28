@@ -19,6 +19,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import RowingIcon from '@material-ui/icons/Rowing';
 import AccountIcon from '@material-ui/icons/AccountCircle';
+import CalendarIcon from '@material-ui/icons/DateRange';
 
 class Menu extends React.Component {
 
@@ -33,6 +34,9 @@ class Menu extends React.Component {
   };
 
   render() {
+
+    var username = localStorage.getItem('username')
+
     return(
       <Fragment>
       <AppBar position="fixed" style={{background: 'transparent', boxShadow: 'none', color: 'black'}}>
@@ -40,12 +44,23 @@ class Menu extends React.Component {
           <Typography variant="title" color="inherit" style={{flex: 1}}>
             HomeReval
           </Typography>
-          <Link to={"/login"} style={{textDecoration: 'none', color: 'black'}}>
-            <Button color="inherit">Inloggen</Button>
-          </Link>
-          <IconButton color="inherit">
-            <AccountIcon />
-          </IconButton>
+          {this.props.loggedIn ? (
+            <Fragment>
+              { username }
+              <IconButton color="inherit">
+                <AccountIcon />
+              </IconButton>
+            </Fragment>
+          ) : (
+            <Fragment>
+              {this.props.drawerVariant === "permanent" ? (
+                <Link to={"/login"} style={{textDecoration: 'none', color: 'black'}}>
+                  <Button color="inherit">Inloggen</Button>
+                </Link>) : (null)
+              }
+            </Fragment>
+          )}
+
         </Toolbar>
       </AppBar>
 
@@ -69,14 +84,16 @@ class Menu extends React.Component {
                 </Link>
 
 
-                <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <RowingIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Oefeningen" />
-                  </ListItem>
-                </Link>
+                {!this.props.loggedIn ? (null) : (
+                  <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
+                    <ListItem button>
+                      <ListItemIcon>
+                        <CalendarIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Deze week" />
+                    </ListItem>
+                  </Link>
+                )}
               </List>
 
               <Divider />
@@ -84,14 +101,17 @@ class Menu extends React.Component {
               <List>
                 <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
                   <ListItem button>
-                    <ListItemText primary="Optie 1" />
+                    <ListItemText primary="Contact  " />
                   </ListItem>
                 </Link>
-                <Link to={"/Login"} onClick={() => this.props.logout()} style={{textDecoration: 'none', color: 'black'}}>
-                  <ListItem button>
-                    <ListItemText primary="Logout" />
-                  </ListItem>
-                </Link>
+                {!this.props.loggedIn ? (null) : (
+                  <Link to={"/login"} onClick={() => this.props.logout()} style={{textDecoration: 'none', color: 'black'}}>
+                    <ListItem button>
+                      <ListItemText primary="Logout" />
+                    </ListItem>
+                  </Link>
+                )}
+
               </List>
 
             </div>

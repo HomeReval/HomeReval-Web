@@ -4,6 +4,7 @@ import {
   Router,
   Route,
   Switch,
+  Redirect
 } from 'react-router-dom'
 
 import { history } from "../helpers/history"
@@ -14,12 +15,9 @@ import Menu from './Menu'
 import Exercises from './Exercises'
 import Exercise from './Exercise'
 
-import { login, logout, checkLoggedIn } from '../actions/userActions'
-
-import {
-  showDrawer,
-  hideDrawer,
-} from '../actions/componentActions'
+import { login, logout, setLoggedIn, refreshLogin } from '../actions/userActions'
+import { getExercises } from '../actions/exerciseActions'
+import { showDrawer, hideDrawer } from '../actions/componentActions'
 
 class App extends React.Component {
 
@@ -35,8 +33,24 @@ class App extends React.Component {
     this.props.dispatch(showDrawer())
   }
 
+  setLoggedIn = () => {
+    this.props.dispatch(setLoggedIn())
+  }
+
+  refreshLogin = () => {
+    this.props.dispatch(refreshLogin())
+  }
+
+  //---------------
+
   hideDrawer = () => {
     this.props.dispatch(hideDrawer())
+  }
+
+  componentDidMount(){
+    if(this.props.state.user.loggedIn){
+      this.props.dispatch(getExercises())
+    }
   }
 
   render() {
@@ -48,7 +62,8 @@ class App extends React.Component {
 
               <div>
                 <Menu drawerVariant={this.props.state.component.drawerVariant}
-                  logout={this.logout}/>
+                  logout={this.logout}
+                  loggedIn={this.props.state.user.loggedIn}/>
               </div>
 
               <div style={{width: '100%'}}>
@@ -67,18 +82,20 @@ class App extends React.Component {
                       drawerVariant={this.props.state.component.drawerVariant}/>
                   ) } />
 
-                  <Route exact path='/exercises' render={ (props) => (
+                  <PrivateRoute exact path='/exercises' loggedIn={this.props.state.user.loggedIn} component={ (props) => (
                     <Exercises { ...props }
                       state={this.props.state}
                       showDrawer={this.showDrawer}
-                      drawerVariant={this.props.state.component.drawerVariant}/>
+                      drawerVariant={this.props.state.component.drawerVariant}
+                      loggedIn={this.props.state.user.loggedIn}/>
                   ) } />
 
-                  <Route exact path='/exercise/:id' render={ (props) => (
+                  <PrivateRoute exact path='/exercise/:id' loggedIn={this.props.state.user.loggedIn} component={ (props) => (
                     <Exercise { ...props }
                       state={this.props.state}
                       showDrawer={this.showDrawer}
-                      drawerVariant={this.props.state.component.drawerVariant}/>
+                      drawerVariant={this.props.state.component.drawerVariant}
+                      loggedIn={this.props.state.user.loggedIn}/>
                   ) } />
 
                   <Route path='*' render={ (props) => (
@@ -97,6 +114,14 @@ class App extends React.Component {
     )
   }
 }
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    rest.loggedIn === true
+      ? <Component {...props} />
+      : <Redirect to='/' />
+  )} />
+)
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch: dispatch

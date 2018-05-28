@@ -18,7 +18,7 @@ class Exercises extends React.Component {
           return(
             <Link to={"/exercise/" + item.id} key={item.id} style={{textDecoration: 'none', color: 'black'}}>
             <Paper  style={styles.tile}>
-              {item.id}
+              {item.id}. {item.description}
             </Paper>
             </Link>
           )
@@ -33,16 +33,15 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
     margin: '100px'
   },
   tile: {
-    width: '200px',
-    height: '200px',
+    width: '300px',
+    height: '100px',
     margin: '10px',
     textAlign: 'center',
-    fontSize: '50px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center'
