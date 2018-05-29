@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 
 class Exercises extends React.Component {
 
+  //Check drawer state on component load
   componentWillMount(){
     if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()

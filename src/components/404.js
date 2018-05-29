@@ -2,6 +2,7 @@ import React from 'react'
 
 class FourOFour extends React.Component {
 
+  //Check drawer state on component load
   componentWillMount(){
     if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()

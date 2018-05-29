@@ -12,6 +12,7 @@ import { history } from "../helpers/history";
 
 class Exercise extends Component {
 
+  //Check drawer state on component load
   componentWillMount(){
     if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()
@@ -23,12 +24,14 @@ class Exercise extends Component {
     //eslint-disable-next-line
     let currentExercise = this.props.exercises.find(x => x.id == this.props.match.params.id);
 
+    //If exercise id doesnt exist redirect to /exercises
     if (currentExercise === undefined){
       history.push('/exercises')
 
       return null;
     }
 
+    //Define score and convert it to 180deg
     let score = 87 // currentExercise.exerciseResults[0].score;
     let scoreDeg = score * 180 / 100;
 
@@ -64,6 +67,7 @@ class Exercise extends Component {
   }
 }
 
+//Gauge option
 let options = {
     isInnerNumbers: false,
     aperture: 180,

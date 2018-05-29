@@ -5,6 +5,7 @@ const defaultState = {
   error: null
 }
 
+//Manage states
 export default function reducer(state=defaultState, action) {
 
     switch (action.type) {

@@ -25,6 +25,8 @@ import { showDrawer, hideDrawer } from '../actions/componentActions'
 
 class App extends React.Component {
 
+
+  //User actions
   login = (username, password) => {
     this.props.dispatch(login(username, password))
   }
@@ -45,14 +47,12 @@ class App extends React.Component {
     this.props.dispatch(refreshLogin())
   }
 
-  //---------------
-
+  //Component actions
   hideDrawer = () => {
     this.props.dispatch(hideDrawer())
   }
 
-  //--------------
-
+  //Alert actions
   successAlert = (message) =>{
     this.props.dispatch(successAlertAction(message))
   }
@@ -65,6 +65,7 @@ class App extends React.Component {
     this.props.dispatch(hideAlertAction())
   }
 
+  //Fetch exercises on refresh
   componentDidMount(){
     if(this.props.state.user.loggedIn){
       this.props.dispatch(getExercises())
@@ -151,6 +152,7 @@ class App extends React.Component {
   }
 }
 
+//Define Private routes
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     rest.loggedIn === true

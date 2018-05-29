@@ -21,6 +21,7 @@ class Login extends React.Component {
     this.onPasswordChange = this.onPasswordChange.bind(this)
   }
 
+  //Update the username and password variables
   onUsernameChange = (e) => {
     this.setState({username: e.target.value})
   }
@@ -29,12 +30,14 @@ class Login extends React.Component {
     this.setState({password: e.target.value})
   }
 
+  //Check drawer state on component load
   componentWillMount(){
     if (this.props.drawerVariant === 'permanent'){
       this.props.hideDrawer()
     }
   }
 
+  //Submit on enter
   _handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       this.props.login(this.state.username, this.state.password);
@@ -57,6 +60,7 @@ class Login extends React.Component {
                 margin="normal"
                 autoFocus={true}
                 onChange={ this.onUsernameChange }
+                onKeyPress={ this._handleKeyPress }
                 />
 
               <TextField
@@ -65,7 +69,7 @@ class Login extends React.Component {
                 type="password"
                 margin="normal"
                 onChange={ this.onPasswordChange }
-                onKeyPress={this._handleKeyPress}
+                onKeyPress={ this._handleKeyPress }
                 />
 
               <Button color="primary" style={{width: "100%", marginTop: '24px'}}

@@ -23,18 +23,14 @@ import CalendarIcon from '@material-ui/icons/DateRange';
 
 class Menu extends React.Component {
 
+  //Set drawer open side
   state = {
     left: false,
   };
 
-  toggleDrawer = (open) => () => {
-    this.setState({
-      left: open,
-    });
-  };
-
   render() {
 
+    //Get username from localstorage
     var username = localStorage.getItem('username')
 
     return(
