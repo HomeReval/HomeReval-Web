@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Paper } from '@material-ui/core'
 import { Link } from 'react-router-dom'
@@ -15,15 +15,21 @@ class Exercises extends React.Component {
   render() {
     return(
       <div style={styles.root}>
-        {this.props.exercises.map(function(item, i){
-          return(
-            <Link to={"/exercise/" + item.id} key={item.id} style={{textDecoration: 'none', color: 'black'}}>
-              <Paper  style={styles.tile} onMouseOver={null}>
-                {item.id}. {item.description}
-              </Paper>
-            </Link>
-          )
-        }, this)}
+        {this.props.exercises.length !== 0 ? (
+          <Fragment>
+          {this.props.exercises.map(function(item, i){
+            return(
+              <Link to={"/exercise/" + item.id} key={item.id} style={{textDecoration: 'none', color: 'black'}}>
+                <Paper  style={styles.tile} onMouseOver={null}>
+                  {item.id}. {item.description}
+                </Paper>
+              </Link>
+            )
+          }, this)}
+          </Fragment>
+        ) : (
+          <div style={{width: '100%', textAlign: 'center'}}>Geen oefeningen gevonden</div>
+        )}
       </div>
     )
   }
@@ -34,7 +40,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // justifyContent: 'center',
     alignItems: 'center',
     margin: '100px'
   },

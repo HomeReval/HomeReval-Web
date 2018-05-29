@@ -3,3 +3,7 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+
+.MuiToolbar-gutters-37 {
+  padding-right: 16px !important;
+}

@@ -1,6 +1,6 @@
 import axios from "axios"
 import {history} from "../helpers/history"
-import { getExercises } from './exerciseActions'
+import { getExercises, clearExercises } from './exerciseActions'
 
 //User login action
 export function login(username, password) {
@@ -79,12 +79,17 @@ export function setLoggedIn(){
 }
 
 export function logout(){
-  //Delete localStorage entries
-  localStorage.removeItem('access_token')
-  localStorage.removeItem('refresh_token')
-  localStorage.removeItem('expires')
-  localStorage.removeItem('username')
+  return function(dispatch) {
+    //Delete localStorage entries
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+    localStorage.removeItem('expires')
+    localStorage.removeItem('username')
 
-  //Set logged in to false
-  return {type: "USER_LOGOUT"}
+    //Clear exercises array
+    dispatch(clearExercises())
+
+    //Set logged in to false
+    return {type: "USER_LOGOUT"}
+  }
 }

@@ -15,7 +15,14 @@ const theme = createMuiTheme({
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {username: '', password: ''}
+    this.state = {
+      username: '',
+      password: '',
+      width: 0,
+      height: 0
+    }
+
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
     this.onUsernameChange = this.onUsernameChange.bind(this)
     this.onPasswordChange = this.onPasswordChange.bind(this)
@@ -37,6 +44,19 @@ class Login extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+
   //Submit on enter
   _handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -45,8 +65,20 @@ class Login extends React.Component {
   }
 
   render(){
+
+    let imgUrl = require('../IMG/homebg.jpg')
+
     return (
       <div>
+        <div style={{
+          height: this.state.height, backgroundImage: 'url(' + imgUrl + ')',
+          backgroundSize: 'cover',
+          overflow: 'hidden',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          opacity: '0.6'
+        }}/>
 
         <div style={styles.center}>
           <Paper style={styles.loginPaper}>
@@ -78,10 +110,13 @@ class Login extends React.Component {
             </MuiThemeProvider>
           </Paper>
         </div>
+
       </div>
     );
   }
 }
+
+
 
 const styles = {
   center: {

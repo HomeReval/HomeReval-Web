@@ -1,6 +1,7 @@
 const defaultState = {
   fetchedExercises: false,
   exercises: [],
+  results: [],
   fetchingExercises: false,
   error: null
 }
@@ -20,10 +21,16 @@ export default function reducer(state=defaultState, action) {
         error: action.payload
       }
     }
-    case "FETCH_EXERCISES_FULFILLED":{
+    case "FETCH_EXERCISES_FULFILLED": {
       return {
         ...state,
         exercises: action.payload
+      }
+    }
+    case "CLEAR_EXERCISES": {
+      return {
+        ...state,
+        exercises: []
       }
     }
     default:{

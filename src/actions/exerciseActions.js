@@ -23,3 +23,7 @@ export function getExercises(){
       })
   }
 }
+
+export function clearExercises() {
+    return {type: "CLEAR_EXERCISES"}
+}

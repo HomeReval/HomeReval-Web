@@ -13,7 +13,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider
+  Divider,
+  Paper
 } from '@material-ui/core';
 
 import HomeIcon from '@material-ui/icons/Home';
@@ -38,23 +39,25 @@ class Menu extends React.Component {
       <AppBar position="fixed" style={{background: 'transparent', boxShadow: 'none', color: 'black'}}>
         <Toolbar>
           <Typography variant="title" color="inherit" style={{flex: 1}}>
-            HomeReval
+            <Link to={'/'} style={{textDecoration: 'none', color: 'black'}}>
+                HomeReval
+            </Link>
           </Typography>
           {this.props.loggedIn ? (
-            <Fragment>
-              { username }
+            <Paper style={{paddingLeft: '12px', display: 'flex', alignItems: 'center'}}>
+              <div>{ username }</div>
               <IconButton color="inherit">
                 <AccountIcon />
               </IconButton>
-            </Fragment>
+            </Paper>
           ) : (
-            <Fragment>
+            <Paper>
               {this.props.drawerVariant === "permanent" ? (
                 <Link to={"/login"} style={{textDecoration: 'none', color: 'black'}}>
                   <Button color="inherit">Inloggen</Button>
                 </Link>) : (null)
               }
-            </Fragment>
+            </Paper>
           )}
 
         </Toolbar>
