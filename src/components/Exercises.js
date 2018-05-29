@@ -17,9 +17,9 @@ class Exercises extends React.Component {
         {this.props.exercises.map(function(item, i){
           return(
             <Link to={"/exercise/" + item.id} key={item.id} style={{textDecoration: 'none', color: 'black'}}>
-            <Paper  style={styles.tile}>
-              {item.id}. {item.description}
-            </Paper>
+              <Paper  style={styles.tile} onMouseOver={null}>
+                {item.id}. {item.description}
+              </Paper>
             </Link>
           )
         }, this)}

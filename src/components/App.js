@@ -7,6 +7,9 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import { Snackbar, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+
 import { history } from "../helpers/history"
 import FourOFour from "./404"
 import Login from "./Login"
@@ -16,6 +19,7 @@ import Exercises from './Exercises'
 import Exercise from './Exercise'
 
 import { login, logout, setLoggedIn, refreshLogin } from '../actions/userActions'
+import { successAlertAction, errorAlertAction, hideAlertAction } from '../actions/alertActions'
 import { getExercises } from '../actions/exerciseActions'
 import { showDrawer, hideDrawer } from '../actions/componentActions'
 
@@ -45,6 +49,20 @@ class App extends React.Component {
 
   hideDrawer = () => {
     this.props.dispatch(hideDrawer())
+  }
+
+  //--------------
+
+  successAlert = (message) =>{
+    this.props.dispatch(successAlertAction(message))
+  }
+
+  errorAlert = (message) =>{
+    this.props.dispatch(errorAlertAction(message))
+  }
+
+  hideAlert = () =>{
+    this.props.dispatch(hideAlertAction())
   }
 
   componentDidMount(){
@@ -79,7 +97,8 @@ class App extends React.Component {
                     <Login { ...props }
                       login={this.login}
                       hideDrawer={this.hideDrawer}
-                      drawerVariant={this.props.state.component.drawerVariant}/>
+                      drawerVariant={this.props.state.component.drawerVariant}
+                      rejected={this.props.state.user.error}/>
                   ) } />
 
                   <PrivateRoute exact path='/exercises' loggedIn={this.props.state.user.loggedIn} component={ (props) => (
@@ -110,6 +129,23 @@ class App extends React.Component {
             </div>
           </Fragment>
         </Router>
+        <Snackbar
+          open={this.props.state.alert.alert}
+          message={this.props.state.alert.message}
+          autoHideDuration={4000}
+          onClose={this.hideAlert}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          action={[
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={this.hideAlert}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
       </div>
     )
   }

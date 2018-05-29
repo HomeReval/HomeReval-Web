@@ -85,14 +85,25 @@ class Menu extends React.Component {
 
 
                 {!this.props.loggedIn ? (null) : (
-                  <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
-                    <ListItem button>
-                      <ListItemIcon>
-                        <CalendarIcon />
-                      </ListItemIcon>
-                      <ListItemText primary="Deze week" />
-                    </ListItem>
-                  </Link>
+                  <Fragment>
+                    <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
+                      <ListItem button>
+                        <ListItemIcon>
+                          <CalendarIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Deze week" />
+                      </ListItem>
+                    </Link>
+
+                    <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                      <ListItem button>
+                        <ListItemIcon>
+                          <RowingIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="List Item" />
+                      </ListItem>
+                    </Link>
+                  </Fragment>
                 )}
               </List>
 

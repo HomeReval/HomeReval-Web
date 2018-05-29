@@ -15,7 +15,7 @@ const root = document.getElementById('root')
 
 if(Date.now() / 1000 < localStorage.getItem('expires')){
   Store.dispatch(setLoggedIn())
-} else {
+} else if (localStorage.getItem('access_token') != null) {
   Store.dispatch(refreshLogin())
 }
 

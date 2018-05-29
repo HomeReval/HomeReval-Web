@@ -14,6 +14,8 @@ export function login(username, password) {
         "password":password
       }
     ).then((response) => {
+        console.log("response:");
+        console.log(response);
         //Set local storage token
         localStorage.setItem('access_token', response.data.accessToken)
         localStorage.setItem('refresh_token', response.data.refreshToken)
@@ -27,12 +29,12 @@ export function login(username, password) {
 
         dispatch(getExercises())
 
-        //dispatch({type: "DISPLAY_SUCCESS_ALERT",payload: "Logged in!"})
+        dispatch({type: "DISPLAY_SUCCESS_ALERT",payload: "Ingelogd!"})
       })
       .catch((err) => {
         dispatch({type: "USER_FETCH_LOGIN_REJECTED", payload: err})
 
-        //dispatch({type: "DISPLAY_ERROR_ALERT",payload: "Gebruikersnaam of wachtwoord is niet juist!"})
+        dispatch({type: "DISPLAY_ERROR_ALERT",payload: "Gebruikersnaam of wachtwoord is niet juist!"})
       })
   }
 }
@@ -49,8 +51,6 @@ export function refreshLogin(){
         "token": token
       }
     ).then((response) => {
-        console.log("response:");
-        console.log(response);
         //Set local storage token
         localStorage.setItem('access_token', response.data.accessToken)
         localStorage.setItem('refresh_token', response.data.refreshToken)

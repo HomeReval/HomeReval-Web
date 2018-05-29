@@ -26,7 +26,8 @@ export default function reducer(state=defaultState, action) {
           ...state,
           loggedIn: true,
           username: action.payload,
-          loggingIn: false
+          loggingIn: false,
+          error: null
         }
       }
       case "ALREADY_LOGGED_IN":{

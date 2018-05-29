@@ -52,6 +52,7 @@ class Login extends React.Component {
               <AccountIcon style={{width: '100%', fontSize: '250px', color: '#2196f3'}}/>
 
               <TextField
+                error={this.props.rejected != null}
                 label="Gebruikersnaam"
                 margin="normal"
                 autoFocus={true}
@@ -59,6 +60,7 @@ class Login extends React.Component {
                 />
 
               <TextField
+                error={this.props.rejected != null}
                 label="wachtwoord"
                 type="password"
                 margin="normal"
