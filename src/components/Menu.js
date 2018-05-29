@@ -60,68 +60,61 @@ class Menu extends React.Component {
         </Toolbar>
       </AppBar>
 
-        <Drawer open={this.state.left} onClose={this.toggleDrawer(false)} variant={this.props.drawerVariant} style={{position: 'relative', zIndex: 1, width: '250px'}}>
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer(false)}
-            onKeyDown={this.toggleDrawer(false)}
-          >
+        <Drawer open={this.state.left} variant={this.props.drawerVariant} style={{position: 'relative', zIndex: 1, width: '250px'}}>
 
-            <div style={{width: '250px', paddingTop: '65px'}}>
-              <List>
-                <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <HomeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Home" />
-                  </ListItem>
-                </Link>
+          <div style={{width: '250px', paddingTop: '65px'}}>
+            <List>
+              <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Home" />
+                </ListItem>
+              </Link>
 
 
-                {!this.props.loggedIn ? (null) : (
-                  <Fragment>
-                    <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
-                      <ListItem button>
-                        <ListItemIcon>
-                          <CalendarIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Deze week" />
-                      </ListItem>
-                    </Link>
-
-                    <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
-                      <ListItem button>
-                        <ListItemIcon>
-                          <RowingIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="List Item" />
-                      </ListItem>
-                    </Link>
-                  </Fragment>
-                )}
-              </List>
-
-              <Divider />
-
-              <List>
-                <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
-                  <ListItem button>
-                    <ListItemText primary="Contact  " />
-                  </ListItem>
-                </Link>
-                {!this.props.loggedIn ? (null) : (
-                  <Link to={"/login"} onClick={() => this.props.logout()} style={{textDecoration: 'none', color: 'black'}}>
+              {!this.props.loggedIn ? (null) : (
+                <Fragment>
+                  <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
                     <ListItem button>
-                      <ListItemText primary="Logout" />
+                      <ListItemIcon>
+                        <CalendarIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Deze week" />
                     </ListItem>
                   </Link>
-                )}
 
-              </List>
+                  <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                    <ListItem button>
+                      <ListItemIcon>
+                        <RowingIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="List Item" />
+                    </ListItem>
+                  </Link>
+                </Fragment>
+              )}
+            </List>
 
-            </div>
+            <Divider />
+
+            <List>
+              <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                <ListItem button>
+                  <ListItemText primary="Contact  " />
+                </ListItem>
+              </Link>
+              {!this.props.loggedIn ? (null) : (
+                <Link to={"/login"} onClick={() => this.props.logout()} style={{textDecoration: 'none', color: 'black'}}>
+                  <ListItem button>
+                    <ListItemText primary="Logout" />
+                  </ListItem>
+                </Link>
+              )}
+
+            </List>
+
           </div>
         </Drawer>
       </Fragment>
