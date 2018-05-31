@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ReactGauge from './react-gauge-capacity';
 
 import {
   IconButton,
-  Typography
+  Typography,
+  Paper
 } from '@material-ui/core';
 import BackIcon from '@material-ui/icons/ArrowBack';
 
-import { history } from "../helpers/history";
+import { history } from '../helpers/history';
 
 class Exercise extends Component {
 
@@ -25,43 +26,64 @@ class Exercise extends Component {
     let currentExercise = this.props.exercises.find(x => x.id == this.props.match.params.id);
 
     //If exercise id doesnt exist redirect to /exercises
-    if (currentExercise === undefined){
+    if ( currentExercise === undefined ){
       history.push('/exercises')
 
       return null;
     }
-
-    //Define score and convert it to 180deg
-    let score = 87 // currentExercise.exerciseResults[0].score;
-    let scoreDeg = score * 180 / 100;
-
     return(
-      <div style={{margin: '64px'}}>
-
-        <div style={{display: 'flex'}}>
-          <IconButton color="inherit" onClick={history.goBack}>
+      <div style={{ margin: '100px' }}>
+        <div style={{ display: 'flex' }}>
+          <IconButton color="inherit" onClick={ history.goBack }>
             <BackIcon />
           </IconButton>
 
-          <Typography variant="title" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-            {currentExercise.description}
+          <Typography variant="title" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            { currentExercise.exercise.description }
           </Typography>
         </div>
 
-        <div style={styles.root}>
-
-          <div style={{width: '50%'}}>
-            Description hier
-          </div>
-
-          <div style={styles.gauge}>
-          <div>
-            <ReactGauge {...options} arrowValue={ scoreDeg/180 } />
-
-            <p style={{textAlign: 'center'}}>Score: {score} </p>
-            </div>
-          </div>
+        <div style={{ margin: '50px' }}>
+          <div style={{ fontWeight: 'bold' }}>Opmerking:</div>
+          { currentExercise.description }
         </div>
+
+        { currentExercise.exerciseSessions.length === 0 ? (
+          <div style={ styles.center }>
+            Er zijn nog geen resultaten voor deze oefening.
+          </div>
+        ) : (
+          <Fragment>
+          { currentExercise.exerciseSessions.map( function( item, i ){
+            let score = null;
+            let scoreDeg = null;
+
+            //Define score and convert it to 180deg
+            if( item.isComplete ){
+              score = item.exerciseResult.score
+              scoreDeg = score * 180 / 100;
+              return(
+                <Paper key={ item.id } style={ styles.paper }>
+                  <div style={ styles.root }>
+
+                    <DateFormat time={ new Date(item.date) }/>
+
+                    <div style={ styles.gauge }>
+                    <div>
+                      <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
+
+                      <p style={{ textAlign: 'center' }}>Score: { score } </p>
+                      </div>
+                    </div>
+                  </div>
+                </Paper>
+              )
+            } else {
+              return( null )
+            }
+          }, this ) }
+          </Fragment>
+        )}
       </div>
     )
   }
@@ -84,47 +106,80 @@ let options = {
     svgContainerWidth: 360,
     svgContainerHeight: 200,
     gaugeCenterLineHeight: 180,
-    viewBox: "30 0 300 200",
+    viewBox: '30 0 300 200',
     ranges: [{
             start: 0,
             end: 81/180,
-            color: "#f3595b"
+            color: '#f3595b'
         },
         {
             start: 81/180,
             end: 135/180,
-            color: "#ffc875"
+            color: '#ffc875'
         },
         {
             start: 135/180,
             end: 180/180,
-            color: "#83d7c0"
+            color: '#83d7c0'
         }]
 
 };
+
+function DateFormat(props){
+  let minutes = props.time.getMinutes()
+  if( minutes < 10 ){
+    minutes = '0' + minutes
+  }
+  return(
+    <div>
+      <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
+        { props.time.getDate() + "-" + props.time.getMonth() + "-" + props.time.getFullYear() }
+      </div>
+      { props.time.getHours() + ":" + minutes }
+    </div>
+  )
+}
 
 const styles = {
   root: {
     display: 'flex',
     flexDirection: 'row',
-    margin: '100px',
-    marginTop: '24px'
+    justifyContent: 'space-between'
   },
   gauge: {
-    width: '50%',
     display: 'flex',
     alignItems: 'flex-end',
     flexDirection: 'column',
     justifyContent: 'center'
-  }
+  },
+  paper: {
+    marginLeft: '50px',
+    marginRight: '50px',
+    marginTop: '15px',
+    marginBottom: '15px',
+    padding: '24px'
+  },
+  center: {
+    position: 'absolute',
+    margin: 'auto',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: '250px',
+    maxWidth: '270px',
+    height: '27px',
+    textAlign: 'center',
+    fontSize: '22px',
+    color: '#00000080'
+  },
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = ( dispatch ) => ({
   dispatch: dispatch
 })
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = ( state ) => ({
   exercises: state.exercise.exercises
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Exercise)
+export default connect( mapStateToProps, mapDispatchToProps )( Exercise )

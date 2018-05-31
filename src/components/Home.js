@@ -3,30 +3,30 @@ import { Paper } from '@material-ui/core'
 
 class Home extends React.Component {
 
-  constructor(props) {
+  constructor( props ) {
     super(props);
     this.state = {
       width: 0,
       height: 0
     }
 
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind( this );
   }
 
   //Check drawer state on component load
   componentWillMount(){
-    if (this.props.drawerVariant === 'temporary'){
+    if ( this.props.drawerVariant === 'temporary' ){
       this.props.showDrawer()
     }
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
+    window.addEventListener( 'resize', this.updateWindowDimensions );
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
+    window.removeEventListener( 'resize', this.updateWindowDimensions );
   }
 
   updateWindowDimensions() {
@@ -35,7 +35,7 @@ class Home extends React.Component {
 
   render() {
 
-    let imgUrl = require('../IMG/homebg.jpg')
+    let imgUrl = require( '../IMG/homebg.jpg' )
 
     return(
       <div>
@@ -49,9 +49,9 @@ class Home extends React.Component {
           opacity: '0.6'
         }}/>
 
-        <div style={styles.center}>
-          <Paper style={styles.paper}>
-            <p style={{fontSize: 40}}> Welkom bij HomeReval </p>
+        <div style={ styles.center }>
+          <Paper style={ styles.paper }>
+            <p style={{ fontSize: 40 }}> Welkom bij HomeReval </p>
           </Paper>
         </div>
       </div>

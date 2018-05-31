@@ -4,17 +4,17 @@ class FourOFour extends React.Component {
 
   //Check drawer state on component load
   componentWillMount(){
-    if (this.props.drawerVariant === 'permanent'){
+    if ( this.props.drawerVariant === 'permanent' ){
       this.props.hideDrawer()
     }
   }
 
   render(){
     return(
-      <div style={styles.errorPage}>
-        <h1 style={{fontSize: '60px', margin:0}}>404</h1>
+      <div style={ styles.errorPage }>
+        <h1 style={{ fontSize: '60px', margin:0 }}>404</h1>
 
-        <p>Sorry <b>{this.props.location.pathname}</b> does not exist.</p>
+        <p>Sorry <b>{ this.props.location.pathname }</b> does not exist.</p>
       </div>
     )
   }

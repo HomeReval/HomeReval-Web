@@ -32,68 +32,68 @@ class Menu extends React.Component {
   render() {
 
     //Get username from localstorage
-    var username = localStorage.getItem('username')
+    var username = localStorage.getItem( 'username' )
 
     return(
       <Fragment>
-      <AppBar position="fixed" style={{background: 'transparent', boxShadow: 'none', color: 'black'}}>
+      <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none', color: 'black' }}>
         <Toolbar>
           <Typography variant="title" color="inherit" style={{flex: 1}}>
-            <Link to={'/'} style={{textDecoration: 'none', color: 'black'}}>
+            <Link to={ '/' } style={{ textDecoration: 'none', color: 'black' }}>
                 HomeReval
             </Link>
           </Typography>
-          {this.props.loggedIn ? (
-            <Paper style={{paddingLeft: '12px', display: 'flex', alignItems: 'center'}}>
+          { this.props.loggedIn ? (
+            <Paper style={{ paddingLeft: '14px', display: 'flex', alignItems: 'center' }}>
               <div>{ username }</div>
-              <IconButton color="inherit">
+              <IconButton color='inherit'>
                 <AccountIcon />
               </IconButton>
             </Paper>
           ) : (
             <Paper>
-              {this.props.drawerVariant === "permanent" ? (
-                <Link to={"/login"} style={{textDecoration: 'none', color: 'black'}}>
-                  <Button color="inherit">Inloggen</Button>
-                </Link>) : (null)
+              { this.props.drawerVariant === "permanent" ? (
+                <Link to={'/login'} style={{ textDecoration: 'none', color: 'black' }}>
+                  <Button color='inherit'>Inloggen</Button>
+                </Link>) : ( null )
               }
             </Paper>
-          )}
+          ) }
 
         </Toolbar>
       </AppBar>
 
-        <Drawer open={this.state.left} variant={this.props.drawerVariant} style={{position: 'relative', zIndex: 1, width: '250px'}}>
+        <Drawer open={ this.state.left } variant={ this.props.drawerVariant } style={{ position: 'relative', zIndex: 1, width: '250px' }}>
 
-          <div style={{width: '250px', paddingTop: '65px'}}>
+          <div style={{ width: '250px', paddingTop: '65px' }}>
             <List>
-              <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+              <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Home" />
+                  <ListItemText primary='Home' />
                 </ListItem>
               </Link>
 
 
-              {!this.props.loggedIn ? (null) : (
+              { !this.props.loggedIn ? ( null ) : (
                 <Fragment>
-                  <Link to={"/exercises"} style={{textDecoration: 'none', color: 'black'}}>
+                  <Link to={ '/exercises' } style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button>
                       <ListItemIcon>
                         <CalendarIcon />
                       </ListItemIcon>
-                      <ListItemText primary="Deze week" />
+                      <ListItemText primary='Deze week' />
                     </ListItem>
                   </Link>
 
-                  <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+                  <Link to={ '/' } style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button>
                       <ListItemIcon>
                         <RowingIcon />
                       </ListItemIcon>
-                      <ListItemText primary="List Item" />
+                      <ListItemText primary='List Item' />
                     </ListItem>
                   </Link>
                 </Fragment>
@@ -103,13 +103,13 @@ class Menu extends React.Component {
             <Divider />
 
             <List>
-              <Link to={"/"} style={{textDecoration: 'none', color: 'black'}}>
+              <Link to={ '/' } style={{ textDecoration: 'none', color: 'black' }}>
                 <ListItem button>
-                  <ListItemText primary="Contact  " />
+                  <ListItemText primary='Contact' />
                 </ListItem>
               </Link>
               {!this.props.loggedIn ? (null) : (
-                <Link to={"/login"} onClick={() => this.props.logout()} style={{textDecoration: 'none', color: 'black'}}>
+                <Link to={ '/login' } onClick={ () => this.props.logout() } style={{ textDecoration: 'none', color: 'black' }}>
                   <ListItem button>
                     <ListItemText primary="Logout" />
                   </ListItem>

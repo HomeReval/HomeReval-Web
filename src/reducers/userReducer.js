@@ -1,6 +1,6 @@
 const defaultState = {
   loggedIn: false,
-  username: "",
+  username: '',
   loggingIn: false,
   error: null
 }
@@ -9,20 +9,21 @@ const defaultState = {
 export default function reducer(state=defaultState, action) {
 
     switch (action.type) {
-      case "USER_FETCH_LOGIN": {
+      case 'USER_FETCH_LOGIN': {
         return {
           ...state,
-          loggingIn: true
+          loggingIn: true,
+          loggedIn: false
         }
       }
-      case "USER_FETCH_LOGIN_REJECTED": {
+      case 'USER_FETCH_LOGIN_REJECTED': {
         return {
           ...state,
           loggedIn: false,
           error: action.payload
         }
       }
-      case "USER_FETCH_LOGIN_FULFILLED": {
+      case 'USER_FETCH_LOGIN_FULFILLED': {
         return {
           ...state,
           loggedIn: true,
@@ -31,13 +32,20 @@ export default function reducer(state=defaultState, action) {
           error: null
         }
       }
-      case "ALREADY_LOGGED_IN":{
+      case 'USER_REFRESH_LOGIN': {
+        return {
+          ...state,
+          loggingIn: true,
+          loggedIn: true
+        }
+      }
+      case 'ALREADY_LOGGED_IN': {
         return {
           ...state,
           loggedIn: true
         }
       }
-      case "USER_LOGOUT":{
+      case 'USER_LOGOUT': {
         return{
           ...state,
           loggedIn: false,
@@ -46,7 +54,7 @@ export default function reducer(state=defaultState, action) {
           error: null
         }
       }
-      default:{
+      default: {
         return state
       }
     }

@@ -1,7 +1,7 @@
 export function showDrawer() {
-  return {type: 'SHOW_DRAWER'}
+  return { type: 'SHOW_DRAWER' }
 }
 
 export function hideDrawer() {
-  return {type: 'HIDE_DRAWER'}
+  return { type: 'HIDE_DRAWER' }
 }
