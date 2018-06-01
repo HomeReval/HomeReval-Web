@@ -51,7 +51,8 @@ class Home extends React.Component {
 
         <div style={ styles.center }>
           <Paper style={ styles.paper }>
-            <p style={{ fontSize: 40 }}> Welkom bij HomeReval </p>
+            <p style={{ fontSize: 40, color: '#2196f3' }}> Welkom bij HomeReval </p>
+            <div style={{ padding: '48px', paddingTop: 0 }}> Het platform dat ondersteuning bied bij het goed uitoefenen van uw fysio en revalidatie oefeningen. </div>
           </Paper>
         </div>
       </div>
@@ -68,7 +69,7 @@ const styles = {
     bottom: 0,
     left: '250px',
     maxWidth: '550px',
-    height: '209px',
+    height: '265px',
     textAlign: 'center',
   },
   paper: {

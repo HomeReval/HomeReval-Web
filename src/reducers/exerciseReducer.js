@@ -1,7 +1,6 @@
 const defaultState = {
   fetchedExercises: false,
   exercises: [],
-  results: [],
   fetchingExercises: false,
   error: null,
   weekNumber: 0

@@ -39,7 +39,7 @@ class Menu extends React.Component {
       <AppBar position="fixed" style={{ background: 'transparent', boxShadow: 'none', color: 'black' }}>
         <Toolbar>
           <Typography variant="title" color="inherit" style={{flex: 1}}>
-            <Link to={ '/' } style={{ textDecoration: 'none', color: 'black' }}>
+            <Link to={ '/' } style={{ textDecoration: 'none', color: 'black', fontSize: '28px' }}>
                 HomeReval
             </Link>
           </Typography>

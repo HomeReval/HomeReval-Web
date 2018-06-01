@@ -1,10 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Paper, IconButton, CircularProgress } from '@material-ui/core'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom'
 
 import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RightIcon from '@material-ui/icons/KeyboardArrowRight';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  },
+});
 
 class Exercises extends React.Component {
 
@@ -39,10 +47,12 @@ class Exercises extends React.Component {
           </div>
         </div>
 
-        { this.props.state.exercise.fetchingExercises ? (
-          <div style={ styles.loader }>
-            <CircularProgress />
-          </div>
+        { !this.props.state.exercise.fetchingExercises ? (
+          <MuiThemeProvider theme={ theme }>
+            <div style={ styles.loader }>
+              <CircularProgress />
+            </div>
+          </MuiThemeProvider>
         ) : ( null )}
 
         { this.props.state.exercise.fetchedExercises && this.props.exercises.length === 0 ? (

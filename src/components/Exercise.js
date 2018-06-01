@@ -31,6 +31,9 @@ class Exercise extends Component {
 
       return null;
     }
+
+    let exerciseSessions = currentExercise.exerciseSessions.filter(e => e.isComplete)
+
     return(
       <div style={{ margin: '100px' }}>
         <div style={{ display: 'flex' }}>
@@ -48,7 +51,7 @@ class Exercise extends Component {
           { currentExercise.description }
         </div>
 
-        { currentExercise.exerciseSessions.length === 0 ? (
+        { currentExercise.exerciseSessions.length === 0 || exerciseSessions.length === 0 ? (
           <div style={ styles.center }>
             Er zijn nog geen resultaten voor deze oefening.
           </div>
@@ -72,7 +75,7 @@ class Exercise extends Component {
                     <div>
                       <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
 
-                      <p style={{ textAlign: 'center' }}>Score: { score } </p>
+                      <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
                       </div>
                     </div>
                   </div>
