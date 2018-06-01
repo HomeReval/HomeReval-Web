@@ -24,6 +24,22 @@ class Exercises extends React.Component {
   }
 
   render() {
+
+    let previousWeek = null
+    let nextWeek = null
+
+    if( this.props.state.exercise.weekNumber === 1){
+      previousWeek = 52
+    } else {
+      previousWeek = this.props.state.exercise.weekNumber - 1
+    }
+
+    if( this.props.state.exercise.weekNumber === 52){
+      nextWeek = 1
+    } else {
+      nextWeek = this.props.state.exercise.weekNumber + 1
+    }
+
     return(
       <div style={ styles.root }>
 
@@ -32,7 +48,7 @@ class Exercises extends React.Component {
             <IconButton onClick={ this.props.previous } style={{ marginBottom: '-4px' }}>
               <LeftIcon />
             </IconButton>
-            <div style={{ fontSize: '20px', color: '#00000080' }}> Week { this.props.state.exercise.weekNumber - 1 }</div>
+            <div style={{ fontSize: '20px', color: '#00000080' }}> Week { previousWeek }</div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '48px', marginRight: '48px' }}>
@@ -40,14 +56,14 @@ class Exercises extends React.Component {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <div style={{ fontSize: '20px', color: '#00000080' }}> Week { this.props.state.exercise.weekNumber + 1 }</div>
+            <div style={{ fontSize: '20px', color: '#00000080' }}> Week { nextWeek }</div>
             <IconButton onClick={ this.props.next } style={{ marginBottom: '-4px' }}>
                <RightIcon />
             </IconButton>
           </div>
         </div>
 
-        { !this.props.state.exercise.fetchingExercises ? (
+        { this.props.state.exercise.fetchingExercises ? (
           <MuiThemeProvider theme={ theme }>
             <div style={ styles.loader }>
               <CircularProgress />
@@ -63,10 +79,12 @@ class Exercises extends React.Component {
 
         <div style={ styles.tileWrapper }>
           { this.props.exercises.map( function( item, i ) {
+            let exerciseSessionsDone = item.exerciseSessions.filter(e => e.isComplete).length
+            let exerciseSessions = item.exerciseSessions.length
             return(
               <Link to={"/exercise/" + item.id} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>
                 <Paper  style={ styles.tile } onMouseOver={ null }>
-                  { item.exercise.description }
+                  <TileInfo date={ item } exerciseSessions={ exerciseSessions } exerciseSessionsDone={ exerciseSessionsDone }/>
                 </Paper>
               </Link>
             )
@@ -75,6 +93,28 @@ class Exercises extends React.Component {
       </div>
     )
   }
+}
+
+function TileInfo(props){
+
+  let startDate = new Date(props.date.startDate)
+  let endDate = new Date(props.date.endDate)
+
+  return(
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', fontSize: '15px' }}>
+      <div>
+        <div style={{ fontWeight: 'bold', fontSize: '18px', color: '#2196f3' }}>
+          { props.date.exercise.description }
+        </div>
+        <div> { props.date.amount}x per sessie </div>
+        <div> { props.exerciseSessionsDone} / { props.exerciseSessions } Sessies gedaan</div>
+      </div>
+      <div style={{ fontSize: '14px', fontStyle: 'italic', display: 'flex', justifyContent: 'flex-end' }}>
+        { startDate.getDate() + "-" + startDate.getMonth() + "-" + startDate.getFullYear() + " " }/
+        { " " + endDate.getDate() + "-" + endDate.getMonth() + "-" + endDate.getFullYear()  }
+      </div>
+    </div>
+  )
 }
 
 const styles = {
@@ -118,13 +158,12 @@ const styles = {
     width: '100%'
   },
   tile: {
-    width: '300px',
+    width: '310px',
     height: '100px',
     margin: '10px',
-    textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    padding: '12px'
   }
 }
 

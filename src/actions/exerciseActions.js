@@ -42,7 +42,13 @@ export function currentWeekNumber() {
 
 export function previousWeek() {
   return function( dispatch ) {
-    dispatch( { type: 'PREVIOUS_WEEK' } )
+
+    if ( store.getState().exercise.weekNumber === 1 ){
+      dispatch( { type: 'PREVIOUS_WEEK', payload: 52 } )
+    } else {
+      dispatch( { type: 'PREVIOUS_WEEK', payload: ( store.getState().exercise.weekNumber - 1 ) } )
+    }
+
     dispatch( clearExercises() )
     dispatch( getExercises( store.getState().exercise.weekNumber ) )
   }
@@ -50,7 +56,13 @@ export function previousWeek() {
 
 export function nextWeek(){
   return function( dispatch ) {
-    dispatch( { type: 'NEXT_WEEK' } )
+
+    if ( store.getState().exercise.weekNumber === 52 ){
+      dispatch( { type: 'PREVIOUS_WEEK', payload: 1 } )
+    } else {
+      dispatch( { type: 'PREVIOUS_WEEK', payload: ( store.getState().exercise.weekNumber + 1 ) } )
+    }
+
     dispatch( clearExercises() )
     dispatch( getExercises( store.getState().exercise.weekNumber ) )
   }

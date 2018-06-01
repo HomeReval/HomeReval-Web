@@ -46,13 +46,13 @@ export default function reducer( state=defaultState, action ) {
     case 'PREVIOUS_WEEK': {
       return {
         ...state,
-        weekNumber: ( state.weekNumber - 1 )
+        weekNumber: action.payload
       }
     }
     case 'NEXT_WEEK': {
       return {
         ...state,
-        weekNumber: ( state.weekNumber + 1 )
+        weekNumber: action.payload
       }
     }
     default:{
