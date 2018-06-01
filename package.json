@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^1.1.0",
     "@material-ui/icons": "^1.1.0",
+    "@material-ui/lab": "^1.0.0-alpha.3",
     "axios": "^0.18.0",
     "create-react-class": "^15.6.3",
     "react": "^16.4.0",

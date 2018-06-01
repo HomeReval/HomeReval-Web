@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ReactGauge from './react-gauge-capacity';
 
+import Canvas from './BodyCanvas'
+
 import {
   IconButton,
   Typography,
@@ -42,11 +44,15 @@ class Exercise extends Component {
           </IconButton>
 
           <Typography variant="title" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            { currentExercise.exercise.description }
+            { currentExercise.exercise.name }
           </Typography>
         </div>
 
         <div style={{ margin: '50px' }}>
+          <div style={{ fontWeight: 'bold' }}>Uitleg:</div>
+          { currentExercise.exercise.description }
+          <br/>
+          <br/>
           <div style={{ fontWeight: 'bold' }}>Opmerking:</div>
           { currentExercise.description }
         </div>
@@ -71,13 +77,17 @@ class Exercise extends Component {
 
                     <DateFormat time={ new Date(item.date) }/>
 
-                    <div style={ styles.gauge }>
-                    <div>
-                      <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
 
-                      <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
+                    <div style={ styles.gauge }>
+                      <div>
+                        <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
+
+                        <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
                       </div>
                     </div>
+
+                    <Canvas />
+
                   </div>
                 </Paper>
               )

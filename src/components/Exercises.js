@@ -104,7 +104,7 @@ function TileInfo(props){
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', fontSize: '15px' }}>
       <div>
         <div style={{ fontWeight: 'bold', fontSize: '18px', color: '#2196f3' }}>
-          { props.date.exercise.description }
+          { props.date.exercise.name }
         </div>
         <div> { props.date.amount}x per sessie </div>
         <div> { props.exerciseSessionsDone} / { props.exerciseSessions } Sessies gedaan</div>
