@@ -22,7 +22,8 @@ class BodyCanvas extends React.Component {
     super( props )
     this.state = {
       playing: false,
-      frame: 0
+      frame: 0,
+      hover: false
     }
   }
 
@@ -61,12 +62,26 @@ class BodyCanvas extends React.Component {
     this.setState( { playing: false } )
   }
 
-  sliderUpdate = (e, value) => {
-
-    console.log(value);
-
+  sliderUpdate = ( e, value ) => {
+    this.update()
     this.setState( { frame: value } )
   }
+
+  togglePlay = () => {
+    if ( this.state.playing ) {
+      this.pauseInterval()
+    } else {
+      this.startInterval()
+    }
+  }
+
+  _onMouseOver = () => {
+    this.setState( {hover: true } );
+  };
+
+  _onMouseOut = () => {
+    this.setState( {hover: false } );
+  };
 
   drawBody = ( checkJoints ) => {
     this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
@@ -163,11 +178,24 @@ class BodyCanvas extends React.Component {
   render() {
     return(
       <div style={styles.paper}>
-        <canvas ref="canvas" width={ 400 } height={ 400 } />
+        <canvas ref="canvas" width={ 400 } height={ 400 } onClick={ this.togglePlay }/>
+
+        { this.state.playing ? (
+          <div style={{ backgroundColor: 'white', opacity: this.state.hover ? '0.6' : '0.0', position: 'absolute', padding: '188px' }}
+               onClick={ this.togglePlay }
+               onMouseOver={ this._onMouseOver }
+               onMouseOut={ this._onMouseOut }>
+            <PauseIcon/>
+          </div>
+        ) : (
+          <div style={{ backgroundColor: 'white', opacity: '0.6', position: 'absolute', padding: '188px' }} onClick={ this.togglePlay }>
+            <PlayIcon/>
+          </div>
+        )}
 
         <Paper style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 
-          {this.state.playing ? (
+          { this.state.playing ? (
             <Fragment>
               <IconButton onClick={ this.pauseInterval }>
                 <PauseIcon />

@@ -16,6 +16,7 @@ import Login from "./Login"
 import Home from './Home'
 import Menu from './Menu'
 import Exercises from './Exercises'
+import ThisWeek from './ThisWeek'
 import Exercise from './Exercise'
 
 import { login, logout, setLoggedIn, refreshLogin } from '../actions/userActions'
@@ -109,6 +110,14 @@ class App extends React.Component {
                       hideDrawer={ this.hideDrawer }
                       drawerVariant={ this.props.state.component.drawerVariant }
                       rejected={ this.props.state.user.error }/>
+                  ) } />
+
+                  <PrivateRoute exact path='/thisWeek' loggedIn={ this.props.state.user.loggedIn } component={ ( props ) => (
+                    <ThisWeek { ...props }
+                      state={ this.props.state }
+                      showDrawer={ this.showDrawer }
+                      drawerVariant={ this.props.state.component.drawerVariant }
+                      loggedIn={ this.props.state.user.loggedIn }/>
                   ) } />
 
                   <PrivateRoute exact path='/exercises' loggedIn={ this.props.state.user.loggedIn } component={ ( props ) => (

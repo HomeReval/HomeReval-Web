@@ -51,7 +51,8 @@ class Exercise extends Component {
         <div style={{ margin: '50px' }}>
           <div style={{ fontWeight: 'bold' }}>Uitleg:</div>
           { currentExercise.exercise.description }
-          <br/><br/>
+          <br/>
+          <br/>
           <div style={{ fontWeight: 'bold' }}>Opmerking:</div>
           { currentExercise.description }
         </div>
@@ -71,28 +72,23 @@ class Exercise extends Component {
               score = item.exerciseResult.score
               scoreDeg = score * 180 / 100;
               return(
-                <div key={ item.id } style={ styles.root }>
-                  <Paper style={ styles.paper }>
-                    <div style={ styles.wrapper }>
+                <Paper key={ item.id } style={ styles.paper }>
+                  <div style={ styles.root }>
 
-                      <DateFormat time={ new Date(item.date) }/>
+                    <DateFormat time={ new Date(item.date) }/>
 
-                      <div style={ styles.gauge }>
-                        <div>
-                          <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
+                    <div style={ styles.gauge }>
+                      <div>
+                        <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
 
-                          <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
-                        </div>
+                        <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
                       </div>
-
-
-
                     </div>
-                  </Paper>
 
-                  <Canvas />
+                    <Canvas />
 
-                </div>
+                  </div>
+                </Paper>
               )
             } else {
               return( null )
@@ -160,26 +156,20 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingRight: '48px',
-    paddingLeft: '48px'
-  },
-  wrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: '100%',
+    justifyContent: 'space-between'
   },
   gauge: {
     display: 'flex',
     alignItems: 'flex-end',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   paper: {
-    marginRight: '48px',
-    padding: '24px',
-    width: '100%'
+    marginLeft: '50px',
+    marginRight: '50px',
+    marginTop: '15px',
+    marginBottom: '15px',
+    padding: '24px'
   },
   center: {
     position: 'absolute',

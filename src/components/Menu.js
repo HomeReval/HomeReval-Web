@@ -79,7 +79,7 @@ class Menu extends React.Component {
 
               { !this.props.loggedIn ? ( null ) : (
                 <Fragment>
-                  <Link to={ '/exercises' } style={{ textDecoration: 'none', color: 'black' }}>
+                  <Link to={ '/thisWeek' } style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button>
                       <ListItemIcon>
                         <CalendarIcon />
@@ -88,12 +88,12 @@ class Menu extends React.Component {
                     </ListItem>
                   </Link>
 
-                  <Link to={ '/' } style={{ textDecoration: 'none', color: 'black' }}>
+                  <Link to={ '/exercises' } style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button>
                       <ListItemIcon>
                         <RowingIcon />
                       </ListItemIcon>
-                      <ListItemText primary='List Item' />
+                      <ListItemText primary='Oefening planning' />
                     </ListItem>
                   </Link>
                 </Fragment>
@@ -103,7 +103,7 @@ class Menu extends React.Component {
             <Divider />
 
             <List>
-              <Link to={ '/' } style={{ textDecoration: 'none', color: 'black' }}>
+              <Link to={ '/contact' } style={{ textDecoration: 'none', color: 'black' }}>
                 <ListItem button>
                   <ListItemText primary='Contact' />
                 </ListItem>

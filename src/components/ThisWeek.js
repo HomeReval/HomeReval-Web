@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Paper, IconButton, CircularProgress } from '@material-ui/core'
+import { Paper, CircularProgress, Table, TableHead, TableRow, TableCell, TableBody, Button } from '@material-ui/core'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom'
-
-import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 const theme = createMuiTheme({
   palette: {
     primary: blue
   },
 });
+
+const monthNames = [ "Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "October", "November", "December" ];
 
 class Exercises extends React.Component {
 
@@ -25,42 +24,17 @@ class Exercises extends React.Component {
 
   render() {
 
-    let previousWeek = null
-    let nextWeek = null
-
-    if( this.props.state.exercise.weekNumber === 1){
-      previousWeek = 52
-    } else {
-      previousWeek = this.props.state.exercise.weekNumber - 1
-    }
-
-    if( this.props.state.exercise.weekNumber === 52){
-      nextWeek = 1
-    } else {
-      nextWeek = this.props.state.exercise.weekNumber + 1
-    }
+    let d = new Date()
 
     return(
       <div style={ styles.root }>
 
         <div style={{ display: 'flex', width: '100%', height: '60px', marginBottom: '50px' }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <IconButton onClick={ this.props.previous } style={{ marginBottom: '-4px' }}>
-              <LeftIcon />
-            </IconButton>
-            <div style={{ fontSize: '20px', color: '#00000080' }}> Week { previousWeek }</div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: '48px', marginRight: '48px' }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '12px', justifyContent: 'space-between', width: '100%'}}>
             <div style={{ fontSize: '22px', color: '#2196f3' }}> Week { this.props.state.exercise.weekNumber } </div>
+            <div> <b>Vandaag:</b> { d.getDate() } { monthNames[ d.getMonth() ] } { d.getFullYear() } </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <div style={{ fontSize: '20px', color: '#00000080' }}> Week { nextWeek }</div>
-            <IconButton onClick={ this.props.next } style={{ marginBottom: '-4px' }}>
-               <RightIcon />
-            </IconButton>
-          </div>
         </div>
 
         { this.props.state.exercise.fetchingExercises ? (
@@ -82,7 +56,7 @@ class Exercises extends React.Component {
             let exerciseSessionsDone = item.exerciseSessions.filter(e => e.isComplete).length
             let exerciseSessions = item.exerciseSessions.length
             return(
-              <Link to={"/exercise/" + item.id} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>
+              <Link to={ "/exercise/" + item.id } key={ item.id } style={{ textDecoration: 'none', color: 'black' }}>
                 <Paper  style={ styles.tile } onMouseOver={ null }>
                   <TileInfo state={ item } exerciseSessions={ exerciseSessions } exerciseSessionsDone={ exerciseSessionsDone }/>
                 </Paper>
@@ -97,21 +71,64 @@ class Exercises extends React.Component {
 
 function TileInfo(props){
 
-  let startDate = new Date(props.state.startDate)
-  let endDate = new Date(props.state.endDate)
+  let startDate = new Date( props.state.startDate )
+  let endDate = new Date( props.state.endDate )
 
   return(
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%', fontSize: '15px' }}>
       <div>
-        <div style={{ fontWeight: 'bold', fontSize: '18px', color: '#2196f3' }}>
-          { props.state.exercise.name }
+        <div>
+
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+            <div style={{ fontWeight: 'bold', fontSize: '18px', color: '#2196f3' }}>
+              { props.state.exercise.name }
+            </div>
+            <div style={{ fontSize: '14px', fontStyle: 'italic', display: 'flex', justifyContent: 'flex-end' }}>
+              { startDate.getDate() + "-" + startDate.getMonth() + "-" + startDate.getFullYear() + " " }/
+              { " " + endDate.getDate() + "-" + endDate.getMonth() + "-" + endDate.getFullYear()  }
+          </div>
+          </div>
+
+          <div> { props.state.exercise.description } </div>
+          <div> { props.state.amount }x per sessie </div>
+          <div> { props.exerciseSessionsDone } / { props.exerciseSessions } Sessies gedaan</div>
+
         </div>
-        <div> { props.state.amount}x per sessie </div>
-        <div> { props.exerciseSessionsDone} / { props.exerciseSessions } Sessies gedaan</div>
-      </div>
-      <div style={{ fontSize: '14px', fontStyle: 'italic', display: 'flex', justifyContent: 'flex-end' }}>
-        { startDate.getDate() + "-" + startDate.getMonth() + "-" + startDate.getFullYear() + " " }/
-        { " " + endDate.getDate() + "-" + endDate.getMonth() + "-" + endDate.getFullYear()  }
+
+        <div>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Sessie</TableCell>
+                <TableCell>Score</TableCell>
+                <TableCell>Datum</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              { props.state.exerciseSessions.map( function( item, i ) {
+
+                let exerciseSessionDate = new Date( item.date )
+
+                return(
+                  <Fragment key={ item.id }>
+                    { item.exerciseResult != null ? (
+                      <TableRow>
+                        <TableCell>{ item.exerciseResult.id }</TableCell>
+                        <TableCell>{ item.exerciseResult.score }</TableCell>
+                        <TableCell>{ exerciseSessionDate.getDate() }-{ exerciseSessionDate.getMonth() }-{ exerciseSessionDate.getFullYear() }</TableCell>
+                        <TableCell><Button style={{ color: '#2196f3' }}>Bekijk</Button></TableCell>
+                      </TableRow>
+                    ) : (
+                      null
+                    )}
+                  </Fragment>
+                )
+              }, this ) }
+            </TableBody>
+          </Table>
+        </div>
+
       </div>
     </div>
   )
@@ -152,14 +169,10 @@ const styles = {
   },
   tileWrapper: {
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+    flexDirection: 'column',
     width: '100%'
   },
   tile: {
-    width: '310px',
-    height: '100px',
     margin: '10px',
     display: 'flex',
     flexDirection: 'column',
