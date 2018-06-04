@@ -1,6 +1,7 @@
 import axios from 'axios'
 import store from '../Store';
-import { getWeekNumber } from "../helpers/weekNumber"
+import { decompress } from "../helpers/decompress"
+import { getWeekNumber } from  '../helpers/weekNumber'
 
 export function initialize(){
   return function( dispatch ) {
@@ -13,7 +14,8 @@ export function getExercises( week ) {
   return function( dispatch ) {
     dispatch( { type: 'FETCH_EXERCISES' } )
 
-    let url = 'http://homereval.ga:5000/api/exerciseplanning/week/' + week ;
+    // let url = 'http://homereval.ga:5000/api/exerciseplanning/week/' + week ;
+    let url = 'http://localhost:58580/api/exerciseplanning/week/' + week ;
 
     //Get access token from local storage
     let token = localStorage.getItem( 'access_token' )
@@ -30,6 +32,41 @@ export function getExercises( week ) {
       .catch( ( err ) => {
         //Set error
         dispatch( { type: 'FETCH_EXERCISES_REJECTED', payload: err } )
+      } )
+  }
+}
+
+export function setPrevId( id ) {
+  return{ type: 'SET_PREV_EXERCISE_ID', payload: id }
+}
+
+export function getRecordingsByExercise( id ) {
+  return function( dispatch ) {
+    dispatch( { type: 'CLEAR_RECORDINGS' } )
+    dispatch( { type: 'FETCH_RECORDINGS' } )
+
+    // let url = 'http://homereval.ga:5000/api/exercise/' + id ;
+    let url = 'http://localhost:58580/api/exercise/' + id ;
+
+    //Get access token from local storage
+    let token = localStorage.getItem( 'access_token' )
+
+    axios.get( url, {
+      headers: {
+        'Authorization': 'Bearer '+ token
+      }
+    } ).then( ( response ) => {
+
+        //Decompress GZIP data
+        let json = decompress( response.data.recording )
+
+        //Set fetched data
+        dispatch( { type: 'FETCH_RECORDINGS_FULFILLED', payload: json } )
+
+      } )
+      .catch( ( err ) => {
+        //Set error
+        dispatch( { type: 'FETCH_RECORDINGS_REJECTED', payload: err } )
       } )
   }
 }

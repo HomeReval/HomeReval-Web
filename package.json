@@ -8,6 +8,7 @@
     "@material-ui/lab": "^1.0.0-alpha.3",
     "axios": "^0.18.0",
     "create-react-class": "^15.6.3",
+    "pako": "^1.0.6",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^4.4.5",

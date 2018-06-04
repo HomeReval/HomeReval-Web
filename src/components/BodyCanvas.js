@@ -47,8 +47,10 @@ class BodyCanvas extends React.Component {
   }
 
   startInterval = () => {
-    this.interval = setInterval( this.update, 100/3 );
-    this.setState( { playing: true } )
+    if( this.state.playing === false ){
+      this.interval = setInterval( this.update, 100/3 );
+      this.setState( { playing: true } )
+    }
   }
 
   stopInterval = () => {
@@ -91,6 +93,40 @@ class BodyCanvas extends React.Component {
     let smallJoint = 3
 
     //Head + Torso
+    this.drawLine( checkJoints.Head.Position, checkJoints.Neck.Position )
+    this.drawLine( checkJoints.Neck.Position, checkJoints.SpineShoulder.Position )
+    this.drawLine( checkJoints.SpineShoulder.Position, checkJoints.SpineMid.Position )
+    this.drawLine( checkJoints.SpineMid.Position, checkJoints.SpineBase.Position )
+
+    //Left Shoulder-Hand
+    this.drawLine( checkJoints.SpineShoulder.Position, checkJoints.ShoulderLeft.Position )
+    this.drawLine( checkJoints.ShoulderLeft.Position, checkJoints.ElbowLeft.Position )
+    this.drawLine( checkJoints.ElbowLeft.Position, checkJoints.WristLeft.Position )
+    this.drawLine( checkJoints.WristLeft.Position, checkJoints.HandLeft.Position )
+    this.drawLine( checkJoints.HandLeft.Position, checkJoints.ThumbLeft.Position )
+    this.drawLine( checkJoints.HandLeft.Position, checkJoints.HandTipLeft.Position )
+
+    //Right Shoulder-Hand
+    this.drawLine( checkJoints.SpineShoulder.Position, checkJoints.ShoulderRight.Position )
+    this.drawLine( checkJoints.ShoulderRight.Position, checkJoints.ElbowRight.Position )
+    this.drawLine( checkJoints.ElbowRight.Position, checkJoints.WristRight.Position )
+    this.drawLine( checkJoints.WristRight.Position, checkJoints.HandRight.Position )
+    this.drawLine( checkJoints.HandRight.Position, checkJoints.ThumbRight.Position )
+    this.drawLine( checkJoints.HandRight.Position, checkJoints.HandTipRight.Position )
+
+    //Left Hip-Foot
+    this.drawLine( checkJoints.SpineBase.Position, checkJoints.HipLeft.Position )
+    this.drawLine( checkJoints.HipLeft.Position, checkJoints.KneeLeft.Position )
+    this.drawLine( checkJoints.KneeLeft.Position, checkJoints.AnkleLeft.Position )
+    this.drawLine( checkJoints.AnkleLeft.Position, checkJoints.FootLeft.Position )
+
+    //Right Hip-Foot
+    this.drawLine( checkJoints.SpineBase.Position, checkJoints.HipRight.Position )
+    this.drawLine( checkJoints.HipRight.Position, checkJoints.KneeRight.Position )
+    this.drawLine( checkJoints.KneeRight.Position, checkJoints.AnkleRight.Position )
+    this.drawLine( checkJoints.AnkleRight.Position, checkJoints.FootRight.Position )
+
+    //Head + Torso
     this.drawJoint( checkJoints.Head.Position, headSize );
     this.drawJoint( checkJoints.Neck.Position, smallJoint );
     this.drawJoint( checkJoints.SpineShoulder.Position, bigJoint );
@@ -125,40 +161,6 @@ class BodyCanvas extends React.Component {
     this.drawJoint( checkJoints.AnkleRight.Position, bigJoint );
     this.drawJoint( checkJoints.FootRight.Position, bigJoint );
 
-    //Head + Torso
-    this.drawLine( checkJoints.Head.Position, checkJoints.Neck.Position )
-    this.drawLine( checkJoints.Neck.Position, checkJoints.SpineShoulder.Position )
-    this.drawLine( checkJoints.SpineShoulder.Position, checkJoints.SpineMid.Position )
-    this.drawLine( checkJoints.SpineMid.Position, checkJoints.SpineBase.Position )
-
-    //Left Shoulder-Hand
-    this.drawLine( checkJoints.SpineShoulder.Position, checkJoints.ShoulderLeft.Position )
-    this.drawLine( checkJoints.ShoulderLeft.Position, checkJoints.ElbowLeft.Position )
-    this.drawLine( checkJoints.ElbowLeft.Position, checkJoints.WristLeft.Position )
-    this.drawLine( checkJoints.WristLeft.Position, checkJoints.HandLeft.Position )
-    this.drawLine( checkJoints.HandLeft.Position, checkJoints.ThumbLeft.Position )
-    this.drawLine( checkJoints.HandLeft.Position, checkJoints.HandTipLeft.Position )
-
-    //Right Shoulder-Hand
-    this.drawLine( checkJoints.SpineShoulder.Position, checkJoints.ShoulderRight.Position )
-    this.drawLine( checkJoints.ShoulderRight.Position, checkJoints.ElbowRight.Position )
-    this.drawLine( checkJoints.ElbowRight.Position, checkJoints.WristRight.Position )
-    this.drawLine( checkJoints.WristRight.Position, checkJoints.HandRight.Position )
-    this.drawLine( checkJoints.HandRight.Position, checkJoints.ThumbRight.Position )
-    this.drawLine( checkJoints.HandRight.Position, checkJoints.HandTipRight.Position )
-
-    //Left Hip-Foot
-    this.drawLine( checkJoints.SpineBase.Position, checkJoints.HipLeft.Position )
-    this.drawLine( checkJoints.HipLeft.Position, checkJoints.KneeLeft.Position )
-    this.drawLine( checkJoints.KneeLeft.Position, checkJoints.AnkleLeft.Position )
-    this.drawLine( checkJoints.AnkleLeft.Position, checkJoints.FootLeft.Position )
-
-    //Right Hip-Foot
-    this.drawLine( checkJoints.SpineBase.Position, checkJoints.HipRight.Position )
-    this.drawLine( checkJoints.HipRight.Position, checkJoints.KneeRight.Position )
-    this.drawLine( checkJoints.KneeRight.Position, checkJoints.AnkleRight.Position )
-    this.drawLine( checkJoints.AnkleRight.Position, checkJoints.FootRight.Position )
-
   }
 
   drawJoint = (position, size) => {
@@ -176,51 +178,70 @@ class BodyCanvas extends React.Component {
   }
 
   render() {
+
+    if ( this.props.autoPlay ){
+      this.startInterval()
+    }
+
+    // console.log(JSON.parse(this.props.data.replace('\\', '')));
+
     return(
-      <div style={styles.paper}>
+      <div style={styles.root}>
         <canvas ref="canvas" width={ 400 } height={ 400 } onClick={ this.togglePlay }/>
 
-        { this.state.playing ? (
-          <div style={{ backgroundColor: 'white', opacity: this.state.hover ? '0.6' : '0.0', position: 'absolute', padding: '188px' }}
-               onClick={ this.togglePlay }
-               onMouseOver={ this._onMouseOver }
-               onMouseOut={ this._onMouseOut }>
-            <PauseIcon/>
-          </div>
+        { this.props.onCanvasControls ? (
+          <Fragment>
+            { this.state.playing ? (
+              <div style={{ backgroundColor: 'white', opacity: this.state.hover ? '0.6' : '0.0', position: 'absolute', padding: '188px' }}
+              onClick={ this.togglePlay }
+              onMouseOver={ this._onMouseOver }
+              onMouseOut={ this._onMouseOut }>
+              <PauseIcon/>
+              </div>
+            ) : (
+              <div style={{ backgroundColor: 'white', opacity: '0.6', position: 'absolute', padding: '188px' }} onClick={ this.togglePlay }>
+              <PlayIcon/>
+              </div>
+            )}
+          </Fragment>
         ) : (
-          <div style={{ backgroundColor: 'white', opacity: '0.6', position: 'absolute', padding: '188px' }} onClick={ this.togglePlay }>
-            <PlayIcon/>
-          </div>
+          null
         )}
 
-        <Paper style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 
-          { this.state.playing ? (
+        <Paper style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          { this.props.controls ? (
             <Fragment>
-              <IconButton onClick={ this.pauseInterval }>
-                <PauseIcon />
-              </IconButton>
-              <IconButton onClick={ this.stopInterval }>
-                <StopIcon/>
-              </IconButton>
+              { this.state.playing ? (
+                <Fragment>
+                  <IconButton onClick={ this.pauseInterval }>
+                    <PauseIcon />
+                  </IconButton>
+                  <IconButton onClick={ this.stopInterval }>
+                    <StopIcon/>
+                  </IconButton>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <IconButton onClick={ this.startInterval }>
+                    <PlayIcon/>
+                  </IconButton>
+                  <IconButton onClick={ this.stopInterval }>
+                    <StopIcon/>
+                  </IconButton>
+                </Fragment>
+              )}
+
+              <MuiThemeProvider theme={ theme }>
+                <div style={{ marginLeft: '24px', marginRight: '24px', width: '100%', alignItems: 'center', display: 'flex' }}>
+                  <Slider value={ this.state.frame } min={ 0 } max={ BodyData.ExerciseRecordings[0].ConvertedBodies.length -1 } step={ 1 } onChange={ this.sliderUpdate }/>
+                </div>
+              </MuiThemeProvider>
+
             </Fragment>
           ) : (
-            <Fragment>
-              <IconButton onClick={ this.startInterval }>
-                <PlayIcon/>
-              </IconButton>
-              <IconButton onClick={ this.stopInterval }>
-                <StopIcon/>
-              </IconButton>
-            </Fragment>
+            null
           )}
-
-          <MuiThemeProvider theme={ theme }>
-            <div style={{ marginLeft: '24px', marginRight: '24px', width: '100%', alignItems: 'center', display: 'flex' }}>
-              <Slider value={ this.state.frame } min={ 0 } max={ BodyData.ExerciseRecordings[0].ConvertedBodies.length -1 } step={ 1 } onChange={ this.sliderUpdate }/>
-            </div>
-          </MuiThemeProvider>
-
         </Paper>
       </div>
     )
@@ -228,9 +249,10 @@ class BodyCanvas extends React.Component {
 }
 
 const styles = {
-  paper: {
+  root: {
     display: 'flex',
     flexDirection: 'column',
+    width: '400px',
   }
 };
 

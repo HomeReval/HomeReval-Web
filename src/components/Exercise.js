@@ -13,13 +13,27 @@ import BackIcon from '@material-ui/icons/ArrowBack';
 
 import { history } from '../helpers/history';
 
+import { getRecordingsByExercise, setPrevId } from '../actions/exerciseActions'
+
 class Exercise extends Component {
 
+  componentWillReceiveProps( newProps ) {
+    if ( this.props.match.params.id !== newProps.match.params.id){
+      console.log('jemoeder');
+    }
+  }
+
   //Check drawer state on component load
-  componentWillMount(){
+  componentWillMount() {
     if (this.props.drawerVariant === 'temporary'){
       this.props.showDrawer()
     }
+
+    if ( this.props.state.exercise.prevExerciseId !== this.props.match.params.id ) {
+      this.props.dispatch( getRecordingsByExercise( 10 ) )
+      this.props.dispatch( setPrevId( this.props.match.params.id ) )
+    }
+
   }
 
   render() {
@@ -29,8 +43,7 @@ class Exercise extends Component {
 
     //If exercise id doesnt exist redirect to /exercises
     if ( currentExercise === undefined ){
-      history.push('/exercises')
-
+      history.push('/')
       return null;
     }
 
@@ -84,13 +97,10 @@ class Exercise extends Component {
                           <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
                         </div>
                       </div>
-
-
-
                     </div>
                   </Paper>
 
-                  <Canvas />
+                  <Canvas data={ this.props.state.exercise.recordings } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
 
                 </div>
               )

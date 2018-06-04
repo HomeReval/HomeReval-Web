@@ -1,9 +1,13 @@
 const defaultState = {
+  fetchingExercises: false,
   fetchedExercises: false,
   exercises: [],
-  fetchingExercises: false,
+  fetchingRecordings: false,
+  fetchedRecordings: false,
+  recordings: [],
   error: null,
-  weekNumber: 0
+  weekNumber: 0,
+  prevExerciseId: -1,
 }
 
 export default function reducer( state=defaultState, action ) {
@@ -34,7 +38,38 @@ export default function reducer( state=defaultState, action ) {
     case 'CLEAR_EXERCISES': {
       return {
         ...state,
-        exercises: []
+        exercises: [],
+        fetchedExercises: false,
+      }
+    }
+    case 'FETCH_RECORDINGS': {
+      return {
+        ...state,
+        fetchingRecordings: true,
+        fetchedRecordings: false
+      }
+    }
+    case 'FETCH_RECORDINGS_REJECTED': {
+      return {
+        ...state,
+        fetchingRecordings: false,
+        fetchedRecordings: true,
+        error: action.payload
+      }
+    }
+    case 'FETCH_RECORDINGS_FULFILLED': {
+      return {
+        ...state,
+        fetchingRecordings: false,
+        fetchedRecordings: true,
+        recordings: action.payload
+      }
+    }
+    case 'CLEAR_RECORDINGS': {
+      return {
+        ...state,
+        recordings: [],
+        fetchedRecordings: false,
       }
     }
     case 'CURRENT_WEEK': {
@@ -53,6 +88,12 @@ export default function reducer( state=defaultState, action ) {
       return {
         ...state,
         weekNumber: action.payload
+      }
+    }
+    case 'SET_PREV_EXERCISE_ID': {
+      return {
+        ...state,
+        prevExerciseId: action.payload
       }
     }
     default:{

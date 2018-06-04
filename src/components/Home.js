@@ -1,6 +1,8 @@
 import React from 'react'
 import { Paper } from '@material-ui/core'
 
+import Canvas from './BodyCanvas'
+
 class Home extends React.Component {
 
   constructor( props ) {
@@ -53,6 +55,7 @@ class Home extends React.Component {
           <Paper style={ styles.paper }>
             <p style={{ fontSize: 40, color: '#2196f3' }}> Welkom bij HomeReval </p>
             <div style={{ padding: '48px', paddingTop: 0 }}> Het platform dat ondersteuning bied bij het goed uitoefenen van uw fysio en revalidatie oefeningen. </div>
+            <Canvas controls={ false } onCanvasControls={ false } autoPlay={ true } />
           </Paper>
         </div>
       </div>
@@ -69,12 +72,13 @@ const styles = {
     bottom: 0,
     left: '250px',
     maxWidth: '550px',
-    height: '265px',
+    height: '713px',
     textAlign: 'center',
   },
   paper: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     width: '550px',
     padding: '24px',
   }

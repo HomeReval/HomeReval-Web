@@ -88,7 +88,7 @@ class Menu extends React.Component {
                     </ListItem>
                   </Link>
 
-                  <Link to={ '/exercises' } style={{ textDecoration: 'none', color: 'black' }}>
+                  <Link to={ '/exercisePlanning' } style={{ textDecoration: 'none', color: 'black' }}>
                     <ListItem button>
                       <ListItemIcon>
                         <RowingIcon />

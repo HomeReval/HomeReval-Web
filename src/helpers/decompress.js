@@ -1,0 +1,19 @@
+import pako from 'pako'
+
+export function decompress( gzip ){
+
+  let compressData = atob( gzip );
+  compressData = compressData.split( '' ).map( function( e ) {
+      return e.charCodeAt( 0 );
+  });
+
+  // Turn number array into byte-array
+  let binData = new Uint8Array( compressData );
+  let data = pako.inflate( binData );
+
+  // Convert gunzipped byteArray back to ascii string:
+  let strData = String.fromCharCode.apply( null, new Uint16Array( data ) );
+
+  // Output to console
+  return strData
+}

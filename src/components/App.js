@@ -7,8 +7,10 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import { Snackbar, IconButton } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { Snackbar, IconButton, CircularProgress } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { blue } from '@material-ui/core/colors';
 
 import { history } from "../helpers/history"
 import FourOFour from "./404"
@@ -24,8 +26,13 @@ import { successAlertAction, errorAlertAction, hideAlertAction } from '../action
 import { initialize, previousWeek, nextWeek } from '../actions/exerciseActions'
 import { showDrawer, hideDrawer } from '../actions/componentActions'
 
-class App extends React.Component {
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  },
+});
 
+class App extends React.Component {
 
   //User actions
   login = ( username, password ) => {
@@ -120,7 +127,7 @@ class App extends React.Component {
                       loggedIn={ this.props.state.user.loggedIn }/>
                   ) } />
 
-                  <PrivateRoute exact path='/exercises' loggedIn={ this.props.state.user.loggedIn } component={ ( props ) => (
+                  <PrivateRoute exact path='/exercisePlanning' loggedIn={ this.props.state.user.loggedIn } component={ ( props ) => (
                     <Exercises { ...props }
                       state={ this.props.state }
                       showDrawer={ this.showDrawer }
@@ -130,13 +137,24 @@ class App extends React.Component {
                       next={ this.nextWeek }/>
                   ) } />
 
-                  <PrivateRoute exact path='/exercise/:id' loggedIn={ this.props.state.user.loggedIn } component={ ( props ) => (
-                    <Exercise { ...props }
-                      state={ this.props.state }
-                      showDrawer={ this.showDrawer }
-                      drawerVariant={ this.props.state.component.drawerVariant }
-                      loggedIn={ this.props.state.user.loggedIn }/>
-                  ) } />
+                     <PrivateRoute exact path='/exercise/:id' loggedIn={ this.props.state.user.loggedIn } component={ ( props ) => (
+                       <Fragment>
+                         { this.props.state.exercise.fetchedExercises ? (
+                           <Exercise { ...props }
+                             state={ this.props.state }
+                             showDrawer={ this.showDrawer }
+                             drawerVariant={ this.props.state.component.drawerVariant }
+                             loggedIn={ this.props.state.user.loggedIn }/>
+                         ) : (
+                           <MuiThemeProvider theme={ theme }>
+                             <div style={ styles.loader }>
+                               <CircularProgress />
+                             </div>
+                           </MuiThemeProvider>
+                         )}
+                        </Fragment>
+                     ) } />
+
 
                   <Route path='*' render={ ( props ) => (
                     <FourOFour { ...props }
@@ -169,6 +187,20 @@ class App extends React.Component {
         />
       </div>
     )
+  }
+}
+
+const styles = {
+  loader: {
+    position: 'absolute',
+    margin: 'auto',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: '250px',
+    maxWidth: '42px',
+    height: '42px',
+    textAlign: 'center',
   }
 }
 
