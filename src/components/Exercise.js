@@ -4,16 +4,20 @@ import ReactGauge from './react-gauge-capacity';
 
 import Canvas from './BodyCanvas'
 
-import {
-  IconButton,
-  Typography,
-  Paper
-} from '@material-ui/core';
+import { IconButton, Typography, Paper, CircularProgress } from '@material-ui/core';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
 import BackIcon from '@material-ui/icons/ArrowBack';
 
 import { history } from '../helpers/history';
 
 import { getRecordingsByExercise, setPrevId } from '../actions/exerciseActions'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  },
+});
 
 class Exercise extends Component {
 
@@ -30,7 +34,7 @@ class Exercise extends Component {
     }
 
     if ( this.props.state.exercise.prevExerciseId !== this.props.match.params.id ) {
-      this.props.dispatch( getRecordingsByExercise( 10 ) )
+      this.props.dispatch( getRecordingsByExercise( this.props.match.params.id ) )
       this.props.dispatch( setPrevId( this.props.match.params.id ) )
     }
 
@@ -100,7 +104,15 @@ class Exercise extends Component {
                     </div>
                   </Paper>
 
-                  <Canvas data={ this.props.state.exercise.recordings } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
+                  { this.props.state.exercise.fetchedRecordings && this.props.state.exercise.recordings[i].exerciseResult.recording != null ? (
+                    <Canvas data={ this.props.state.exercise.recordings[i].exerciseResult.recording } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
+                  ) : (
+                    <MuiThemeProvider theme={ theme }>
+                      <div style={ styles.loader }>
+                        <CircularProgress />
+                      </div>
+                    </MuiThemeProvider>
+                  ) }
 
                 </div>
               )

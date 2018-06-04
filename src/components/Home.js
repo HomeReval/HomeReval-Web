@@ -1,5 +1,6 @@
 import React from 'react'
 import { Paper } from '@material-ui/core'
+import BodyData from '../IMG/exercise.json'
 
 import Canvas from './BodyCanvas'
 
@@ -55,13 +56,14 @@ class Home extends React.Component {
           <Paper style={ styles.paper }>
             <p style={{ fontSize: 40, color: '#2196f3' }}> Welkom bij HomeReval </p>
             <div style={{ padding: '48px', paddingTop: 0 }}> Het platform dat ondersteuning bied bij het goed uitoefenen van uw fysio en revalidatie oefeningen. </div>
-            <Canvas controls={ false } onCanvasControls={ false } autoPlay={ true } />
           </Paper>
         </div>
       </div>
     )
   }
 }
+
+// <Canvas data={ JSON.stringify(BodyData.ExerciseRecordings[0]) } controls={ false } onCanvasControls={ false } autoPlay={ true } />
 
 const styles = {
   center: {

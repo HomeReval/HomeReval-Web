@@ -4,11 +4,11 @@ import { blue } from '@material-ui/core/colors';
 import { Paper, IconButton } from '@material-ui/core'
 import Slider from '@material-ui/lab/Slider'
 
+import { decompress } from "../helpers/decompress";
+
 import PlayIcon from '@material-ui/icons/PlayArrow';
 import StopIcon from '@material-ui/icons/Stop';
 import PauseIcon from '@material-ui/icons/Pause';
-
-import BodyData from '../IMG/exercise.json'
 
 const theme = createMuiTheme({
   palette: {
@@ -23,28 +23,34 @@ class BodyCanvas extends React.Component {
     this.state = {
       playing: false,
       frame: 0,
-      hover: false
+      hover: false,
     }
   }
 
-  componentDidMount(){
+  componentWillMount() {
+    this.data = JSON.parse( decompress( this.props.data ) )
+  }
+
+  componentDidMount() {
     this.canvas = this.refs.canvas
     this.ctx = this.canvas.getContext("2d")
 
     this.setState( { frame: 0 } )
 
-    this.update()
+    if ( this.props.autoPlay ){
+      this.startInterval()
+    }
   }
 
   update = () => {
-    this.drawBody( BodyData.ExerciseRecordings[0].ConvertedBodies[this.state.frame].CheckJoints )
+    this.drawBody( this.data.ConvertedBodies[this.state.frame].CheckJoints )
 
     this.setState( { frame: this.state.frame + 1 } )
 
-    if( ( BodyData.ExerciseRecordings[0].ConvertedBodies.length -1 ) < this.state.frame ){
+    if( ( this.data.ConvertedBodies.length -1 ) < this.state.frame ){
       this.setState( { frame: 0 } )
     }
-  }
+}
 
   startInterval = () => {
     if( this.state.playing === false ){
@@ -178,13 +184,6 @@ class BodyCanvas extends React.Component {
   }
 
   render() {
-
-    if ( this.props.autoPlay ){
-      this.startInterval()
-    }
-
-    // console.log(JSON.parse(this.props.data.replace('\\', '')));
-
     return(
       <div style={styles.root}>
         <canvas ref="canvas" width={ 400 } height={ 400 } onClick={ this.togglePlay }/>
@@ -207,7 +206,6 @@ class BodyCanvas extends React.Component {
         ) : (
           null
         )}
-
 
         <Paper style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
           { this.props.controls ? (
@@ -234,7 +232,7 @@ class BodyCanvas extends React.Component {
 
               <MuiThemeProvider theme={ theme }>
                 <div style={{ marginLeft: '24px', marginRight: '24px', width: '100%', alignItems: 'center', display: 'flex' }}>
-                  <Slider value={ this.state.frame } min={ 0 } max={ BodyData.ExerciseRecordings[0].ConvertedBodies.length -1 } step={ 1 } onChange={ this.sliderUpdate }/>
+                  <Slider value={ this.state.frame } min={ 0 } max={ this.data.ConvertedBodies.length -1 } step={ 1 } onChange={ this.sliderUpdate }/>
                 </div>
               </MuiThemeProvider>
 
