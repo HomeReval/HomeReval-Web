@@ -114,7 +114,7 @@ function TileInfo(props){
                   <Fragment key={ item.id }>
                     { item.exerciseResult != null ? (
                       <TableRow>
-                        <TableCell>{ item.exerciseResult.id }</TableCell>
+                        <TableCell>{ i + 1 }</TableCell>
                         <TableCell>{ item.exerciseResult.score }</TableCell>
                         <TableCell>{ exerciseSessionDate.getDate() }-{ exerciseSessionDate.getMonth() }-{ exerciseSessionDate.getFullYear() }</TableCell>
                         <TableCell><Button style={{ color: '#2196f3' }}>Bekijk</Button></TableCell>

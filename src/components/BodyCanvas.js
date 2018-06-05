@@ -28,7 +28,11 @@ class BodyCanvas extends React.Component {
   }
 
   componentWillMount() {
-    this.data = JSON.parse( decompress( this.props.data ) )
+    if( this.props.bypass ) {
+      this.data = this.props.data
+    } else {
+      this.data = JSON.parse( decompress( this.props.data ) )
+    }
   }
 
   componentDidMount() {
@@ -36,6 +40,8 @@ class BodyCanvas extends React.Component {
     this.ctx = this.canvas.getContext("2d")
 
     this.setState( { frame: 0 } )
+
+    this.update()
 
     if ( this.props.autoPlay ){
       this.startInterval()
@@ -171,20 +177,19 @@ class BodyCanvas extends React.Component {
 
   drawJoint = (position, size) => {
   	this.ctx.beginPath();
-  	this.ctx.arc(( position.X - ( position.X * 2 ) - ( position.X * 2 ) * 100 ) + 200, ( position.Y - ( position.Y * 2 ) * 100 ) + 170, size, 0, 2 * Math.PI );
+  	this.ctx.arc(( position.X - ( position.X * 2 ) - ( position.X * 2 ) * 90 ) + 200, ( position.Y - ( position.Y * 2 ) * 90 ) + 220, size, 0, 2 * Math.PI );
     this.ctx.fillStyle = '#2196f3';
     this.ctx.fill();
   }
 
   drawLine = (position1, position2) => {
       this.ctx.beginPath();
-      this.ctx.moveTo(( position1.X - ( position1.X * 2 ) - ( position1.X * 2 ) * 100 ) + 200, ( position1.Y - ( position1.Y * 2 ) * 100 ) + 170);
-      this.ctx.lineTo(( position2.X - ( position2.X * 2 ) - ( position2.X * 2 ) * 100 ) + 200, ( position2.Y - ( position2.Y * 2 ) * 100 ) + 170);
+      this.ctx.moveTo(( position1.X - ( position1.X * 2 ) - ( position1.X * 2 ) * 90 ) + 200, ( position1.Y - ( position1.Y * 2 ) * 90 ) + 220);
+      this.ctx.lineTo(( position2.X - ( position2.X * 2 ) - ( position2.X * 2 ) * 90 ) + 200, ( position2.Y - ( position2.Y * 2 ) * 90 ) + 220);
       this.ctx.stroke();
   }
 
   render() {
-    console.log(this.data)
     return(
       <div style={styles.root}>
         <canvas ref="canvas" width={ 400 } height={ 400 } onClick={ this.togglePlay }/>

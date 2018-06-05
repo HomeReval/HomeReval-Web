@@ -1,6 +1,5 @@
 import axios from 'axios'
 import store from '../Store';
-// import { decompress } from "../helpers/decompress"
 import { getWeekNumber } from  '../helpers/weekNumber'
 
 export function initialize(){

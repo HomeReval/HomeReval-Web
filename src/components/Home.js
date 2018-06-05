@@ -56,6 +56,7 @@ class Home extends React.Component {
           <Paper style={ styles.paper }>
             <p style={{ fontSize: 40, color: '#2196f3' }}> Welkom bij HomeReval </p>
             <div style={{ padding: '48px', paddingTop: 0 }}> Het platform dat ondersteuning bied bij het goed uitoefenen van uw fysio en revalidatie oefeningen. </div>
+            <Canvas data={ BodyData.ExerciseRecordings[0].ConvertedBodies } bypass={ true } controls={ false } onCanvasControls={ false } autoPlay={ true } />
           </Paper>
         </div>
       </div>
@@ -63,7 +64,6 @@ class Home extends React.Component {
   }
 }
 
-// <Canvas data={ JSON.stringify(BodyData.ExerciseRecordings[0]) } controls={ false } onCanvasControls={ false } autoPlay={ true } />
 
 const styles = {
   center: {

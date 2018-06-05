@@ -105,10 +105,10 @@ class Exercise extends Component {
                   </Paper>
 
                   { this.props.state.exercise.fetchedRecordings && this.props.state.exercise.recordings[i].exerciseResult.recording != null ? (
-                    <Canvas data={ this.props.state.exercise.recordings[i].exerciseResult.recording } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
+                    <Canvas data={ this.props.state.exercise.recordings[i].exerciseResult.recording } bypass={ false } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
                   ) : (
                     <MuiThemeProvider theme={ theme }>
-                      <div style={ styles.loader }>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '400px', height: '400px' }}>
                         <CircularProgress />
                       </div>
                     </MuiThemeProvider>
