@@ -74,7 +74,7 @@ const styles = {
     bottom: 0,
     left: '250px',
     maxWidth: '550px',
-    height: '713px',
+    height: '665px',
     textAlign: 'center',
   },
   paper: {

@@ -53,6 +53,8 @@ class Exercise extends Component {
 
     let exerciseSessions = currentExercise.exerciseSessions.filter(e => e.isComplete)
 
+    console.log(currentExercise);
+
     return(
       <div style={{ margin: '100px' }}>
         <div style={{ display: 'flex' }}>
@@ -67,7 +69,7 @@ class Exercise extends Component {
 
         <div style={{ margin: '50px' }}>
           <div style={{ fontWeight: 'bold' }}>Uitleg:</div>
-          { currentExercise.exercise.description }
+          { currentExercise.exercise.description + ", " + currentExercise.amount }x per sessie.
           <br/><br/>
           <div style={{ fontWeight: 'bold' }}>Opmerking:</div>
           { currentExercise.description }
@@ -92,13 +94,16 @@ class Exercise extends Component {
                   <Paper style={ styles.paper }>
                     <div style={ styles.wrapper }>
 
-                      <DateFormat time={ new Date(item.date) }/>
+                      <div>
+                        Sessie { i + 1 } / { currentExercise.exerciseSessions.length }
+                        <DateFormat time={ new Date(item.date) }/>
+                      </div>
 
                       <div style={ styles.gauge }>
                         <div>
-                          <ReactGauge { ...options } arrowValue={ scoreDeg/180 } />
+                          <ReactGauge { ...options } arrowValue={ scoreDeg / 180 } />
 
-                          <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: { score } </p>
+                          <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: <b>{ score }</b> / 100 </p>
                         </div>
                       </div>
                     </div>
