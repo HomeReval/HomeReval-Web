@@ -7,8 +7,8 @@ export function login( username, password ) {
   return function( dispatch ) {
     dispatch( { type: 'USER_FETCH_LOGIN' } )
 
-    // let url = 'http://136.144.132.176:5000/api/user/login';
-    let url = 'http://localhost:58580/api/user/login';
+    let url = 'http://136.144.132.176:5000/api/user/login';
+    // let url = 'http://localhost:58580/api/user/login';
 
     //Post login request
     axios.post( url, {

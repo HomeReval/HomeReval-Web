@@ -108,7 +108,7 @@ class Exercise extends Component {
                     <Canvas data={ this.props.state.exercise.recordings[i].exerciseResult.recording } bypass={ false } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
                   ) : (
                     <MuiThemeProvider theme={ theme }>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '400px', height: '400px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '500px', height: '448px' }}>
                         <CircularProgress />
                       </div>
                     </MuiThemeProvider>
@@ -199,7 +199,8 @@ const styles = {
     justifyContent: 'center',
   },
   paper: {
-    marginRight: '48px',
+    marginRight: '24px',
+    marginTop: '24px',
     padding: '24px',
     width: '100%'
   },

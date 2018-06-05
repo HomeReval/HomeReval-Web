@@ -13,8 +13,8 @@ export function getExercises( week ) {
   return function( dispatch ) {
     dispatch( { type: 'FETCH_EXERCISES' } )
 
-    // let url = 'http://homereval.ga:5000/api/exerciseplanning/week/' + week ;
-    let url = 'http://localhost:58580/api/exerciseplanning/week/' + week ;
+    let url = 'http://homereval.ga:5000/api/exerciseplanning/week/' + week ;
+    // let url = 'http://localhost:58580/api/exerciseplanning/week/' + week ;
 
     //Get access token from local storage
     let token = localStorage.getItem( 'access_token' )
@@ -45,8 +45,8 @@ export function getRecordingsByExercise( id ) {
     dispatch( { type: 'CLEAR_RECORDINGS' } )
     dispatch( { type: 'FETCH_RECORDINGS' } )
 
-    // let url = 'http://homereval.ga:5000/api/exerciseplanning/' + id ;
-    let url = 'http://localhost:58580/api/exerciseplanning/' + id ;
+    let url = 'http://homereval.ga:5000/api/exerciseplanning/' + id ;
+    // let url = 'http://localhost:58580/api/exerciseplanning/' + id ;
 
     //Get access token from local storage
     let token = localStorage.getItem( 'access_token' )

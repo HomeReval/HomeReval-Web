@@ -177,27 +177,27 @@ class BodyCanvas extends React.Component {
 
   drawJoint = (position, size) => {
   	this.ctx.beginPath();
-  	this.ctx.arc(( position.X - ( position.X * 2 ) - ( position.X * 2 ) * 90 ) + 200, ( position.Y - ( position.Y * 2 ) * 90 ) + 220, size, 0, 2 * Math.PI );
+  	this.ctx.arc(( position.X - ( position.X * 2 ) - ( position.X * 2 ) * 90 ) + 250, ( position.Y - ( position.Y * 2 ) * 90 ) + 220, size, 0, 2 * Math.PI );
     this.ctx.fillStyle = '#2196f3';
     this.ctx.fill();
   }
 
   drawLine = (position1, position2) => {
       this.ctx.beginPath();
-      this.ctx.moveTo(( position1.X - ( position1.X * 2 ) - ( position1.X * 2 ) * 90 ) + 200, ( position1.Y - ( position1.Y * 2 ) * 90 ) + 220);
-      this.ctx.lineTo(( position2.X - ( position2.X * 2 ) - ( position2.X * 2 ) * 90 ) + 200, ( position2.Y - ( position2.Y * 2 ) * 90 ) + 220);
+      this.ctx.moveTo(( position1.X - ( position1.X * 2 ) - ( position1.X * 2 ) * 90 ) + 250, ( position1.Y - ( position1.Y * 2 ) * 90 ) + 220);
+      this.ctx.lineTo(( position2.X - ( position2.X * 2 ) - ( position2.X * 2 ) * 90 ) + 250, ( position2.Y - ( position2.Y * 2 ) * 90 ) + 220);
       this.ctx.stroke();
   }
 
   render() {
     return(
       <div style={styles.root}>
-        <canvas ref="canvas" width={ 400 } height={ 400 } onClick={ this.togglePlay }/>
+        <canvas ref="canvas" width={ 500 } height={ 400 } onClick={ this.togglePlay }/>
 
         { this.props.onCanvasControls ? (
           <Fragment>
             { this.state.playing ? (
-              <div style={{ backgroundColor: 'white', opacity: this.state.hover ? '0.6' : '0.0', position: 'absolute', padding: '188px' }}
+              <div style={{ backgroundColor: 'white', opacity: this.state.hover ? '0.6' : '0.0', position: 'absolute', padding: '238px' }}
               onClick={ this.togglePlay }
               onMouseOver={ this._onMouseOver }
               onMouseOut={ this._onMouseOut }>
@@ -256,7 +256,7 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    width: '400px',
+    width: '500px',
   }
 };
 
