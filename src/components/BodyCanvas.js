@@ -43,11 +43,11 @@ class BodyCanvas extends React.Component {
   }
 
   update = () => {
-    this.drawBody( this.data.ConvertedBodies[this.state.frame].CheckJoints )
+    this.drawBody( this.data[this.state.frame].CheckJoints )
 
     this.setState( { frame: this.state.frame + 1 } )
 
-    if( ( this.data.ConvertedBodies.length -1 ) < this.state.frame ){
+    if( ( this.data.length -1 ) < this.state.frame ){
       this.setState( { frame: 0 } )
     }
 }
@@ -184,6 +184,7 @@ class BodyCanvas extends React.Component {
   }
 
   render() {
+    console.log(this.data)
     return(
       <div style={styles.root}>
         <canvas ref="canvas" width={ 400 } height={ 400 } onClick={ this.togglePlay }/>
@@ -232,7 +233,7 @@ class BodyCanvas extends React.Component {
 
               <MuiThemeProvider theme={ theme }>
                 <div style={{ marginLeft: '24px', marginRight: '24px', width: '100%', alignItems: 'center', display: 'flex' }}>
-                  <Slider value={ this.state.frame } min={ 0 } max={ this.data.ConvertedBodies.length -1 } step={ 1 } onChange={ this.sliderUpdate }/>
+                  <Slider value={ this.state.frame } min={ 0 } max={ this.data.length -1 } step={ 1 } onChange={ this.sliderUpdate }/>
                 </div>
               </MuiThemeProvider>
 

@@ -8,11 +8,11 @@ export function decompress( gzip ){
   });
 
   // Turn number array into byte-array
-  let binData = new Uint8Array( compressData );
+  let binData = new Uint32Array( compressData );
   let data = pako.inflate( binData );
 
   // Convert gunzipped byteArray back to ascii string:
-  let strData = String.fromCharCode.apply( null, new Uint16Array( data ) );
+  let strData = new TextDecoder('utf-8').decode( data );   //String.fromCharCode.apply( null, new Uint32Array( data ) );
 
   return strData
 }
