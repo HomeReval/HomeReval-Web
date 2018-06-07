@@ -93,7 +93,7 @@ class Exercise extends Component {
                   <Paper style={ styles.paper }>
                     <div style={ styles.wrapper }>
 
-                      <div>
+                      <div style={{ minWidth: '100px' }}>
                         Sessie { i + 1 } / { currentExercise.exerciseSessions.length }
                         <DateFormat time={ new Date(item.date) }/>
                       </div>
@@ -102,7 +102,7 @@ class Exercise extends Component {
                         <div>
                           <ReactGauge { ...options } arrowValue={ scoreDeg / 180 } />
 
-                          <p style={{ textAlign: 'center', marginBottom: 0 }}>Score: <b>{ score }</b> / 100 </p>
+                          <p style={{ textAlign: 'center', marginBottom: 0, fontSize: '20px' }}>Score: <b>{ score }%</b></p>
                         </div>
                       </div>
                     </div>
@@ -141,7 +141,7 @@ function DateFormat( props ){
   return(
     <div>
       <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
-        { props.time.getDate() + "-" + props.time.getMonth() + "-" + props.time.getFullYear() }
+        { props.time.getDate() + "-" + ( props.time.getMonth() + 1 ) + "-" + props.time.getFullYear() }
       </div>
       { props.time.getHours() + ":" + minutes }
     </div>
@@ -162,10 +162,10 @@ let options = {
     centralCircleRadius: 10,
     marks: [0, null, 10, null, 20, null , 30, null, 40, null, 50, null, 60, null, 70, null, 80, null , 90, null, 100],
     contentWidth: 360,
-    svgContainerWidth: 360,
-    svgContainerHeight: 200,
+    svgContainerWidth: 500,
+    svgContainerHeight: 240,
     gaugeCenterLineHeight: 180,
-    viewBox: '30 0 300 200',
+    viewBox: '30 0 300 220',
     ranges: [{ start: 0, end: 81/180, color: '#f3595b' },
              { start: 81/180, end: 135/180, color: '#ffc875' },
              { start: 135/180, end: 180/180, color: '#83d7c0' }]
@@ -182,14 +182,15 @@ const styles = {
   wrapper: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     height: '100%',
   },
   gauge: {
     display: 'flex',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
+    width: '100%'
   },
   paper: {
     marginRight: '24px',
