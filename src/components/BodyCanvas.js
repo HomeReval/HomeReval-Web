@@ -98,7 +98,7 @@ class BodyCanvas extends React.Component {
   };
 
   drawBody = ( checkJoints ) => {
-    this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
+    // this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
 
     let headSize = 20
     let bigJoint = 5

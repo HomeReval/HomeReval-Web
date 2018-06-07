@@ -108,7 +108,9 @@ class Exercise extends Component {
                     </div>
                   </Paper>
 
-                  { this.props.state.exercise.fetchedRecordings && this.props.state.exercise.recordings[i].exerciseResult.recording != null ? (
+                  { this.props.state.exercise.fetchedRecordings &&
+                    this.props.state.exercise.recordings[i].exerciseResult != null &&
+                    this.props.state.exercise.recordings[i].exerciseResult.recording != null? (
                     <Canvas data={ this.props.state.exercise.recordings[i].exerciseResult.recording } bypass={ false } controls={ true } onCanvasControls={ false } autoPlay={ false }/>
                   ) : (
                     <MuiThemeProvider theme={ theme }>
