@@ -71,7 +71,8 @@ class Login extends React.Component {
     return (
       <div>
         <div style={{
-          height: this.state.height, backgroundImage: 'url(' + imgUrl + ')',
+          height: this.state.height,
+          backgroundImage: 'url(' + imgUrl + ')',
           backgroundSize: 'cover',
           overflow: 'hidden',
           backgroundRepeat: 'no-repeat',

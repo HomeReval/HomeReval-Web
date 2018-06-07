@@ -51,9 +51,8 @@ class Exercise extends Component {
       return null;
     }
 
-    let exerciseSessions = currentExercise.exerciseSessions.filter(e => e.isComplete)
-
-    console.log(currentExercise);
+    // Define exerciseSessions when isComplete is true
+    let exerciseSessions = currentExercise.exerciseSessions.filter( e => e.isComplete )
 
     return(
       <div style={{ margin: '100px' }}>
@@ -132,6 +131,21 @@ class Exercise extends Component {
   }
 }
 
+function DateFormat( props ){
+  let minutes = props.time.getMinutes()
+  if( minutes < 10 ){
+    minutes = '0' + minutes
+  }
+  return(
+    <div>
+      <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
+        { props.time.getDate() + "-" + props.time.getMonth() + "-" + props.time.getFullYear() }
+      </div>
+      { props.time.getHours() + ":" + minutes }
+    </div>
+  )
+}
+
 //Gauge option
 let options = {
     isInnerNumbers: false,
@@ -150,38 +164,10 @@ let options = {
     svgContainerHeight: 200,
     gaugeCenterLineHeight: 180,
     viewBox: '30 0 300 200',
-    ranges: [{
-            start: 0,
-            end: 81/180,
-            color: '#f3595b'
-        },
-        {
-            start: 81/180,
-            end: 135/180,
-            color: '#ffc875'
-        },
-        {
-            start: 135/180,
-            end: 180/180,
-            color: '#83d7c0'
-        }]
-
+    ranges: [{ start: 0, end: 81/180, color: '#f3595b' },
+             { start: 81/180, end: 135/180, color: '#ffc875' },
+             { start: 135/180, end: 180/180, color: '#83d7c0' }]
 };
-
-function DateFormat(props){
-  let minutes = props.time.getMinutes()
-  if( minutes < 10 ){
-    minutes = '0' + minutes
-  }
-  return(
-    <div>
-      <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
-        { props.time.getDate() + "-" + props.time.getMonth() + "-" + props.time.getFullYear() }
-      </div>
-      { props.time.getHours() + ":" + minutes }
-    </div>
-  )
-}
 
 const styles = {
   root: {
